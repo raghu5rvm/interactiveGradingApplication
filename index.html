@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en_us">
+	<head>
+		<meta charset="UTF-8">
+		<title>v1.0</title>
+		<link type="text/css" rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<header>Something in there</header>
+		<textarea id="dataField" onkeyup="getData(this)" onchange="getData(this)" placeholder="paste your data here"></textarea>
+		<ul>
+			Number of students:<li id="dataCount">0</li>
+			Average Marks:<li id="avgMarks">0</li>
+			<button id="drawBtn" onclick="draw()" style="padding:15px 25px;background:#61DE61;color:#4d4d4d">Plot Now</button>
+		</ul>
+		<section>
+				<form id="dataIPForm">
+				<table id="dataDisplay">
+				</table>
+				</form>
+		</section>
+		<br/>
+		<div id="drawSpace"></div>
+		<canvas id="myChart" width="400" height="250"></canvas>
+		<footer>footer elements here</footer>
+		<script src="scripts/Chart.js"></script>
+		<script type="text/javascript" src="scripts/jquery.js"></script>
+		<script type="text/javascript" src="scripts/jquery.min.js"></script>
+		<script type="text/javascript" src="scripts/three.js"></script>
+		<script type="text/javascript" src="scripts/three.min.js"></script>
+		<script type="text/javascript" src="scripts/chartjs_drag.js"></script>
+		<script type="text/javascript" src="scripts/chartjs_drag.min.js"></script>
+		<script type="text/javascript" src="scripts/script.js"></script>
+	</body>
+</html>
