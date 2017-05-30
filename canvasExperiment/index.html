@@ -14,10 +14,12 @@
 			var labels=[];
 			var bgColors=[];
 			var brdColors=[];
+			//some random amount of data and data values are generated using Math.random function
 			var dataCount=Math.floor(Math.random()*100);
 			for(var i=0;i<dataCount;i++){
 				data[i]=Math.floor(Math.random()*22);
 				labels[i]=i+1;
+				//random background and border colors are gnerated for bars in chart.
 				bgColors[i]='#'+Math.floor(Math.random()*16777215).toString(16);
 				brdColors[i]='#'+Math.floor(Math.random()*16777215).toString(16);
 			}
