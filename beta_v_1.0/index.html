@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Inteactive Gradin...</title>
+		<link type="text/css" rel="stylesheet" href="styles/style.css">
+		<meta charset="UTF-8">
+	</head>
+	<body>
+		<header>
+			<ul>
+				<li id="tabInput" onclick="tab1()"><img title="Input" alt="Input" src="img/input.png"></li>
+				<li id="tabStat" onclick="tab2()"><img title="Statistics and Plot" alt="Plot" src="img/plot.png"></li>
+				<li id="tabExport" onclick="tab3()"><img title="Export Data" alt="Export" src="img/export.png"></li>
+			</ul>
+		</header>
+		<section>
+			<div id="divInput">
+				<center>
+					<textarea name="dataField" placeholder="Place Your Data here" onkeyup="getData(this)" onchange="getData(this)"></textarea><br/>
+					<input id="min" name="min" placeholder="Enter minimum"><br/>
+					<input id="max" name="max" placeholder="Enter maximum"><br/>
+					<input id="gradeCount" name="gradeCount" placeholder="Enter number of partitions"><br/>		
+					<button onclick="confirmData()">Confirm Data</button><br/><br/>
+					Data Cont: <p id="dataCount"></p>
+					Average Marks: <p id="avgMarks"></p>			
+				</center>
+			</div>
+			<div id="divStat">
+					<canvas id="myChart" width="100%" height="100%"></canvas>
+			</div>
+			<div id="divExport">
+				<center>
+					<br/></br/><br/><h3>Under construction</h3>
+				</center>
+			</div>
+		</section>
+		<footer>
+		
+		</footer>
+		<script type="text/javascript" src="scripts/Chart.js"></script>
+		<script type="text/javascript" src="scripts/jquery.js"></script>
+		<script type="text/javascript" src="scripts/Chart.bundle.js"></script>
+		<script type="text/javascript" src="scripts/chartjs-plugin-annotation.js"></script>
+		<script type="text/javascript" src="scripts/chartjs-plugin-draggable.js"></script>
+		
+		<script type="text/javascript" src="scripts/script.js"></script>
+	
+	</body>
+</html>
