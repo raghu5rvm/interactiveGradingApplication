@@ -40,7 +40,7 @@ border:1px solid red;
 section div {
 display:block;
 width:100%;
-border:1px solid green;
+border:0px solid green;
 }
 input {
 width:15%;
