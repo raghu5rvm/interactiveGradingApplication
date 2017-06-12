@@ -18,25 +18,25 @@
 					<textarea id="dataField" placeholder="Place Your Data here" onkeyup="getData(this)" onchange="getData(this)"></textarea>
 					<input id="min" name="min" placeholder="Enter minimum" min="0">
 					<input id="max" name="max" placeholder="Enter maximum" min="0">
-					<input type="number" id="gradeCount" name="gradeCount" placeholder="Enter number of partitions" min="0" max="7"><br/>		
+					<input type="number" id="gradeCount" name="gradeCount" placeholder="Enter number of partitions" min="0" max="7"><br/><br/>		
 					Label1:<input class="labels" type="text" id="g1L" value="A+">
 					Label2:<input class="labels" type="text" id="g2L" value="A">
 					Label3:<input class="labels" type="text" id="g3L" value="B">
 					Label4:<input class="labels" type="text" id="g4L" value="C">
 					Label5:<input class="labels" type="text" id="g5L" value="D">
 					Label6:<input class="labels" type="text" id="g6L" value="E">
-					Label7:<input class="labels" type="text" id="g7L" value="F"><br/>
+					Label7:<input class="labels" type="text" id="g7L" value="F"><br/><br/>
 					<button onclick="confirmData()">Confirm Data</button><br/><br/>
 					Data Cont: <p id="dataCount"></p><br/>
 					Average Marks: <p id="avgMarks"></p>
 			</div>
-			<div id="divStat">
+			<div id="divStat"><br/>
 					<button id='resetZoom' onclick="myChart.resetZoom()">Reset</button>
 					<canvas id="myChart" width="100%" height="100%"></canvas>
 			</div>
 			<div id="divExport">
 				<center>
-					<br/></br/><br/><h3>Stats</h3>
+					<br/><br/><br/><h3>Stats</h3>
 					<ul id="stats">
 						Grade Labels:<li style="color:red;display:block;"></li>
 						Static Grade values:<li style="color:red;display:block;"></li>
