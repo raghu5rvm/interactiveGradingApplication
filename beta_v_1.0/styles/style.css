@@ -42,8 +42,31 @@ display:block;
 width:100%;
 border:1px solid green;
 }
-textarea,input {
+input {
 width:15%;
 height:50px;
-display:block;
+display:inine-block;
+margin:10px;
+}
+textarea {
+width:250px;
+height:100px;
+margin:20px 20px -30px 10px;
+}
+button {
+width:200px;
+height:50px;
+
+}
+.labels {
+width:90px;
+height:35px;
+}
+p{
+color:red;
+display:inline;
+}
+#resetZoom{
+float:right;
+margin-right:50px;
 }
