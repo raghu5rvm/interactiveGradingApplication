@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head><title>some</title>
+	<meta charset="UTF-8">
+	</head>
+	<body>
+		<div id="contain">
+		
+		</div>
+		<style>
+			#contain {
+				width:100%;
+				height:;
+				border:1px solid yellow;
+				}
+			svg {
+				position:absolute;
+				border:1px solid red;
+				}
+			canvas {
+				border:2px solid green;
+				}
+		</style>
+			<script>
+			window.onload=function(){
+				
+				var w = window.innerWidth*0.95;
+				var h = window.innerHeight*0.7;
+				var s = '<svg width="97%" height="'+h+'"></svg>'
+				var c = document.createElement("canvas");
+
+				document.getElementById("contain").innerHTML=s;					  	
+				document.getElementById("contain").appendChild(c);
+				
+				var svgElement = document.getElementsByTagName("svg")[0];
+				var canvasElement = document.getElementsByTagName("canvas")[0];
+				var r=canvasElement.width/16;
+				window.addEventListener('resize', resizeCanvas, false);
+				window.addEventListener('resize', reDrawSvg, false);
+				resizeCanvas();
+				redraw();
+				function  resizeCanvas(){
+					canvasElement.setAttribute("width",window.innerWidth*0.95);				
+					canvasElement.style.background="transparent";
+					svgElement.style.background="transparent";
+					canvasElement.style.display="";
+					console.log(canvasElement[0]);
+					redraw();
+					}
+				function redraw(){
+					console.log(canvasElement);
+					console.log(canvasElement);
+					var canvasContext=canvasElement.getContext('2d');
+					r=canvasElement.width/16;
+					canvasContext.beginPath();
+					canvasContext.arc(r,r,r,0,2*Math.PI);
+					canvasContext.fillStyle="#FFC0CB";
+					canvasContext.fill();
+					}
+				function reDrawSvg(){
+					var rt=document.getElementsByTagName("rect")[0];
+						r=canvasElement.width/16;
+						rt.setAttributeNS(null, 'x', r);
+						rt.setAttributeNS(null, 'y', r);
+						rt.setAttributeNS(null, 'width', r);
+						rt.setAttributeNS(null, 'height', r);
+					
+					}
+					var svgns = "http://www.w3.org/2000/svg";
+					var rect = document.createElementNS(svgns,'rect');
+						rect.setAttributeNS(null, 'x', r);
+						rect.setAttributeNS(null, 'y', r);
+						rect.setAttributeNS(null, 'width', r);
+						rect.setAttributeNS(null, 'height', r);
+						rect.setAttributeNS(null, 'stroke', "yellow");
+						rect.setAttributeNS(null, 'fill', '#'+Math.round(0xffffff * Math.random()).toString(16));
+						svgElement.appendChild(rect);
+
+		}
+		
+		
+			</script>	
+	</body>
+</html>
