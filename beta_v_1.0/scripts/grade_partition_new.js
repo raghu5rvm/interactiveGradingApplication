@@ -6,7 +6,7 @@ function grade_partition_new(Data,Positions){
     for(var j=0;j<Data.length;j++){
       if(Data[j]<maxlimit){
         sum++;
-        delete Data[j];
+        Data.splice(j,j);
       }
     }
     Result.push(sum);
