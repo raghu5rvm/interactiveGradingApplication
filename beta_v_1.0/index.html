@@ -16,27 +16,35 @@
 		<section>
 			<div id="divInput">
 					<textarea id="dataField" placeholder="Place Your Data here" onkeyup="getData(this)" onchange="getData(this)"></textarea>
-					<input id="min" name="min" placeholder="Enter minimum" min="0">
-					<input id="max" name="max" placeholder="Enter maximum" min="0">
-					<input type="number" id="gradeCount" name="gradeCount" placeholder="Enter number of partitions" min="0" max="7"><br/><br/>		
+					<input type="number" id="min" name="min" placeholder="Enter minimum" min="0" value="0">
+					<input type="number" id="max" name="max" placeholder="Enter maximum" min="0" value="100">
+					<input type="number" id="gradeCount" placeholder="Enter number of partitions" min="0" max="7" value="5">
+					<input type="number" id="resolution" placeholder="Enter graph Resolution" value="1"><br/>		
 					Label1:<input class="labels" type="text" id="g1L" value="A+">
 					Label2:<input class="labels" type="text" id="g2L" value="A">
 					Label3:<input class="labels" type="text" id="g3L" value="B">
 					Label4:<input class="labels" type="text" id="g4L" value="C">
 					Label5:<input class="labels" type="text" id="g5L" value="D">
 					Label6:<input class="labels" type="text" id="g6L" value="E">
-					Label7:<input class="labels" type="text" id="g7L" value="F"><br/><br/>
-					<button onclick="confirmData()">Confirm Data</button><br/><br/>
-					Data Cont: <p id="dataCount"></p><br/>
-					Average Marks: <p id="avgMarks"></p>
+					<br/>
+					Value1:<input class="values" type="text" id="g1V" value="10">
+					Value2:<input class="values" type="text" id="g2V" value="9">
+					Value3:<input class="values" type="text" id="g3V" value="8">
+					Value4:<input class="values" type="text" id="g4V" value="7">
+					Value5:<input class="values" type="text" id="g5V" value="6">
+					Value6:<input class="values" type="text" id="g6V" value="5">
+					Value7:<input class="values" type="text" id="g7V" value="4"><br/><br/><br/>
+					Data Cont: <p id="dataCount"></p><br/><br>
+					Average Marks: <p id="avgMarks"></p><br/><br/>
+					<button onclick="confirmData()">Confirm Data</button><br/>
 			</div>
-			<div id="divStat"><br/>
+			<div id="divStat">
 					<button id='resetZoom' onclick="myChart.resetZoom()">Reset</button>
 					<canvas id="myChart" width="100%" height="100%"></canvas>
 			</div>
 			<div id="divExport">
 				<center>
-					<br/><br/><br/><h3>Stats</h3>
+					<br/></br/><br/><h3>Stats</h3>
 					<ul id="stats">
 						Grade Labels:<li style="color:red;display:block;"></li>
 						Static Grade values:<li style="color:red;display:block;"></li>
@@ -47,24 +55,122 @@
 						Dynamic Average GPA:<li style="color:red;display:block;"></li>
 						<li style="color:red;display:block;"></li>
 					</ul>
+					<table>
+						<tr id="row0">
+							<th>Grade</th>
+							<th>Grade Points</th>
+							<th>Arithmatic lower bound</th>
+							<th>Arithmatic upper bound</th>
+							<th>Frequency</th>
+							<th>Selected Lower bound</th>
+							<th>Selected Upper bound</th>
+							<th>New Frequency</th>
+						</tr>
+						<tr id="row1">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr id="row2">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr id="row3">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr id="row4">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr id="row5">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr id="row6">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr id="row7">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr id="row8">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
 				</center>
 			</div>
 		</section>
 		<footer>
-		
+			
 		</footer>
 		<script type="text/javascript" src="scripts/Chart.js"></script>
-		<script type="text/javascript" src="scripts/jquery.js"></script>
 		<script type="text/javascript" src="scripts/Chart.bundle.js"></script>
 		<script type="text/javascript" src="scripts/chartjs-plugin-annotation.js"></script>
 		<script type="text/javascript" src="scripts/chartjs-plugin-draggable.js"></script>
 		<script type="text/javascript"  src="scripts/hammer.min.js"></script>
-		<script type="text/javascript"  src="scripts/chartjs-plugin-zoom.js"></script>
-		
-		<script type="text/javascript" src="scripts/freq_dist.js"></script>
-		<script type="text/javascript" src="scripts/g_p.js"></script>
+		<script type="text/javascript"  src="scripts/chartjs-plugin-zoom.js"></script>		
 		<script type="text/javascript" src="scripts/script.js"></script>
-		
+		<script type="text/javascript" src="scripts/tab1.js"></script>
+		<script type="text/javascript" src="scripts/tab2.js"></script>
+		<script type="text/javascript" src="scripts/tab3.js"></script>
+		<script type="text/javascript" src="scripts/grade_part.js"></script>
 	
 	</body>
 </html>
