@@ -1,16 +1,20 @@
 function grade_partition_new(Data,Positions){
   let Result=[];
-  for(var i=0;i<Positions.length;i++){
+  let min=-Infinity;
+  let cumsum=0;
+  for(let i=0;i<Positions.length;i++){
     let maxlimit=Positions[i];
     let sum=0;
-    for(var j=0;j<Data.length;j++){
-      if(Data[j]<maxlimit){
+    for(let j=0;j<Data.length;j++){
+      if(Data[j]<maxlimit  && Data[j]>=min){
         sum++;
-        delete Data[j];
+        cumsum++;
       }
     }
+        min=Positions[i];
+    //console.log(Data);
     Result.push(sum);
   }
-  Result.push(Data.length);
+  Result.push(Data.length-cumsum);
   return Result;
 }
