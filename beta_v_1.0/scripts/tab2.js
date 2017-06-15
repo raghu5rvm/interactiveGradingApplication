@@ -9,7 +9,10 @@ function tab2(){
 	document.getElementById("divInput").style.display="none";
 	document.getElementById("divStat").style.display="block";
 	document.getElementById("divExport").style.display="none";
-
+	if(myChart==null)
+		drawChart();
+	else
+		myChart.update();
 }
 
 
@@ -29,10 +32,10 @@ function drawChart(){
 		brdColors[i]='#'+Math.floor(Math.random()*16777215).toString(16);
 		}	
 	for(var i=0;i<(gradeCount);i++){
-		myAnnotationsFixed[i]=makeAnnotation((Math.floor((max-min)*(i+1)/gradeCount)),gradeLabels[i],false,"#008000",5);
+		myAnnotationsFixed[i]=makeAnnotation((Math.floor((max-min)*(i+1)/gradeCount)),gradeLabels[i],false,"#008000",5,i);
 	}
 	for(var i=0;i<(gradeCount);i++){
-		myAnnotationsMovable[i]=makeAnnotation((Math.floor((max-min)*(i+1)/gradeCount)),gradeLabels[i],true,"#F15454",7);
+		myAnnotationsMovable[i]=makeAnnotation((Math.floor((max-min)*(i+1)/gradeCount)),gradeLabels[i],true,"#F15454",7,i);
 	}
 
 	
@@ -80,7 +83,7 @@ function drawChart(){
 }
 
 
-function makeAnnotation(val,text,dragFlag,brdrColor,brdrWidth){
+function makeAnnotation(val,text,dragFlag,brdrColor,brdrWidth,index){
 var annot;
 if(brdrColor==null)
 	brdrColor='#'+Math.floor(Math.random()*16777215).toString(16);
@@ -89,6 +92,7 @@ if(brdrWidth==null)
 if(dragFlag==true)
 	text="\u22B2"+text+"\u22B3";
 return  annot = {
+		pos:index,
 		type: 'line',
 		mode: 'vertical',
 		scaleID: 'x-axis-0',
@@ -97,24 +101,60 @@ return  annot = {
 		borderWidth: brdrWidth,
 		label: {
 			enabled: true,
-			content: text
+			content: text,
 				},
 		draggable: dragFlag,
 		onDragStart: function(e) {
 			console.log(e.type, e.subject.config.value);
 				},
 		onDrag: function(e) {
-			console.log("\ndragging .......\n");
 				},
 		onDragEnd: function(e) {
+			validateDrag(e);
 			console.log(e.type, e.subject.config.value);
 				},
 		onClick: function(e) {
-			console.log(e.type, this);
+			
 				}
 			}	
 	}
 
 
+function validateDrag(bar){
+	stats();
+	console.log(bar);
+	var index=bar.subject.config.pos;
+	console.log(index);
+	//for begining
+	if(index==0){
+		cPosRight=parseInt(grade_values_movable[index+1]);
+		cPosLeft=Infinity;
+		}
+	else if(index==(grade_values_movable.length-1)) {
+		cPosRight=Infinity;
+		cPosLeft=parseInt(grade_values_movable[index-1]);
+		}
+	else {
+		cPosRight=parseInt(grade_values_movable[index+1]);
+		cPosLeft=parseInt(grade_values_movable[index-1]);
+		}
+	var cPos=parseInt(grade_values_movable[index]);
+	console.log("setting curr pos to "+cPos+" where cleft is "+cPosLeft+" and cright is "+cPosRight);
+		
+	if(cPos>=cPosRight){
+		cPos=cPosRight-resolution;
+		bar.subject.config.value=cPos;
+		console.log("cPos=cRight+resolution ==="+(cPosRight)+"-"+(resolution)+"===>"+(cPos));				
 
+		}
+	else if(cPos<=cPosLeft){
+		cPos=cPosLeft+resolution;	
+		console.log("cPos=cLeft+resolution ==="+cPosLeft+"+"+resolution+"===>"+cPos);				
+		bar.subject.config.value=cPos;
+	}
+//	console.log(bar);
+	test=bar;
+	myChart.update();	
+	
+}
 

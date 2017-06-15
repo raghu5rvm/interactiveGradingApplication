@@ -7,7 +7,7 @@ function grade_part(Data,Positions){
     for(var j=0;j<Data.length;j++){
       if(Data[j]<maxlimit){
         sum++;
-        delete Data[j];
+        Data.splice(j,1);
       }
     }
     Result.push(sum);

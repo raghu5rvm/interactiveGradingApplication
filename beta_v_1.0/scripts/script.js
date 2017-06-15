@@ -17,3 +17,9 @@ var myChart;
 var myAnnotationsFixed=[];
 var myAnnotationsMovable=[];
 
+var grade_values_movable=[],
+	grade_values_fixed=[];
+	
+
+	
+var test;

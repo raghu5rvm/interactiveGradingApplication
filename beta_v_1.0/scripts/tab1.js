@@ -1,7 +1,7 @@
 /***********************************************************************
  * 						Tab 1 functions											
  * *********************************************************************/
-
+tab1();
 function tab1() {
 	console.log("inside tab1 function");
 	document.getElementById("divInput").style.display="block";
@@ -16,21 +16,15 @@ function getData(event){
 		event=event || window.event;
 		console.log("go to school");
 		tempData=event.value;
+		tempData=tempData.trim();
 		tempData=tempData.split('\n');
-		//event.value="";
 		for(var i=0;i<tempData.length;i++){
 			tempData[i]=parseFloat(tempData[i]);
-			if(tempData[i]==NaN){
-				if(i<tempData.length-1){
-				tempData=[];
-				alert("Invalid input!!!\nEnter only marks which are numbers.");
-				break;
+			if(isNaN(tempData[i])){				
+				tempData.splice(i,1);
+				console.log("Invalid input!!!\nEnter only marks which are numbers.Data is of length :"+Data.length+" deleting :"+"new data is "+Data);
 				}	
-				}
-			else
-				tempData.pop();
 			}
-		
 		console.log("Data is validated :"+tempData);
 		Data=tempData;
 		var total=0.0,
@@ -52,6 +46,7 @@ function confirmData(){
 	min=document.getElementById("min").value;
 	max=document.getElementById("max").value;
 	gradeCount=document.getElementById("gradeCount").value;
+	resolution=parseInt(document.getElementById("resolution").value);
 	if(isNaN(min) || isNaN(max) || isNaN(gradeCount)){
 		alert("Invalid input!!!");
 		min=null;
@@ -61,17 +56,21 @@ function confirmData(){
 	else {
 		gradeLabels=[];
 		gradeValues=[]
-		for(var i=0;i<gradeCount;i++){
+		for(var i=0;i<=gradeCount;i++){
 				var lId="g"+(i+1)+"L";
 				var vId="g"+(i+1)+"V";
+				console.log("picking label from id : "+vId);
+				gradeCredits[i]=document.getElementById(vId).value;
+				if(i==gradeCount)
+					break;
 				console.log("picking label from id : "+lId);
 				gradeLabels[i]=document.getElementById(lId).value;
-				gradeLabels.reverse();
+				//gradeLabels.reverse();
 				console.log(	gradeLabels[i]   );			
 			}
 		}
 	console.log("min is now "+min+" and max is "+max+" grade count=="+gradeCount);
-	drawChart();
+
 }
 
 
