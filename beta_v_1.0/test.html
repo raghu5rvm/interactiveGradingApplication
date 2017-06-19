@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Grade partitions</title>
+
+    <link rel="stylesheet" href="styles/qunit-2.3.3.css" />
+    <script src="scripts/qunit-2.3.3.js"></script>
+    <script src="scripts/grade_partition_new.js"></script>
+
+    <script>
+    QUnit.test("grade_partition_new test", function(assert) {
+        var input1=[5,3,7,5,8,6,4,3,2,4,5,9,7,6,1,4,2,6,9,6,3,5,1,8,4];
+        var part1=[2,5,7,9];
+        var result1=[2,9,8,4,2];
+        var input2=[31.5,89,45.9,24,43.6,89,67.4,46,70,86,91,94.3,53,93,66.8,44,32.3,81,76.7,83,92,58,63,79,89.5,90.4,50.2,71.3,54.9,45.8];
+        var part2=[50,60,70,80,90];
+        var result2=[8,4,3,4,6,5];
+        assert.deepEqual(grade_partition_new(input1,part1),result1,"example1");
+        assert.deepEqual(grade_partition_new(input2,part2),result2,"example2")
+    });
+    </script>
+</head>
+<body>
+    <div id="qunit"></div>
+</body>
+</html>
