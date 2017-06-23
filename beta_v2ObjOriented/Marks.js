@@ -1,5 +1,9 @@
-function Marks(data){
-  this.data=data;
+function Marks(){
+  var data;
+  this.setData=function(userdata){
+    this.data=userdata;
+  }
+ 
   this.getcounts=function(part){
     return grade_partition_new(data,part);
   }
