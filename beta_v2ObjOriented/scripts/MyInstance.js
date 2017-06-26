@@ -20,15 +20,14 @@ function MyInstance(){
 	//other variables
 	this.average;
 	this.myChart=null;
-	this.gradeBoundsDynamic;
-	this.gradeBoundsStatic;
 	this.myAnnotationsFixed=[];
 	this.myAnnotationsMovable=[];
 	this.myAnnotations=[];
-	this.gradeValuesMovable;
-	this.gradeValuesFixed;
-	this.gradeBoundsDynamic;
-	this.gradeBoundsStatic;
+	this.gradeValuesMovable=[];
+	this.gradeValuesFixed=[];
+	this.gradeBoundsDynamic=[];
+	this.gradeBoundsStatic=[];
+
 }	
 /*******************************************************************************************************************************************
  * 																	
@@ -77,14 +76,14 @@ MyInstance.prototype={
 			this.gradeLabels=[];
 			this.gradeCredits=[]
 			for(var i=this.gradeCount;i>=0;i--){
-					var lId="g"+(i+1)+"L";
-					var vId="g"+(i+1)+"V";
+					var lId="g"+(parseInt(i)+1)+"L";
+					var vId="g"+(parseInt(i)+1)+"V";
 					console.log("picking credit value from id : "+vId);
 					this.gradeCredits[i]=document.getElementById(vId).value;
 					console.log("picking label from id : "+lId);
 					this.gradeLabels[i]=document.getElementById(lId).value;
 					console.log(	this.gradeLabels[i]   );			
-					}
+				}
 
 			//validation of all inputs and report to user the same......
 			//check once for any non validated variables before confirming	
@@ -211,8 +210,15 @@ MyInstance.prototype={
 							} 
 						}
 							
-					});
-			  
+					});	
+			this.gradeValuesFixed=[];
+			this.gradeValuesMovable=[];
+			for(var i=0;i<this.myAnnotationsMovable.length;i++){
+				this.gradeValuesMovable[i]=this.myAnnotationsMovable[i].value;
+				this.gradeValuesFixed[i]=this.myAnnotationsFixed[i].value;						
+			}
+
+
 				  },
 				  
 			
@@ -250,16 +256,33 @@ MyInstance.prototype={
 							onDragEnd: function(e) {
 								console.log(e.type, e.subject.config.value);
 								//recompute statistics and position after drag end
-								obj.getStats();
-								
 								//begin validating drag movement........
-								console.log(e);
-								var index=e.subject.config.pos;
+								obj.getStats();	
+								obj.validateBarMovement(e);
+								obj.myChart.update();
+								
+								//end of validate drag......................		
+
+								},
+							onClick: function(e) {
+									console.log("clicked on annotation!!! Nothing to do");
+									}
+								}	
+						},
+
+					fun1:function(){
+						alert("this works");
+						},
+
+					validateBarMovement:function(bar){
+								console.log(bar);
+								var cPos,cPosRight,cPosLeft;
+								var index=bar.subject.config.pos;
 								console.log(index);
 								//for begining
 									if(index==0){
 										cPosRight=parseInt(this.gradeValuesMovable[index+1]);
-										cPosLeft=Infinity;
+										cPosLeft=-Infinity;
 										}
 									else if(index==(this.gradeValuesMovable.length-1)) {
 										cPosRight=Infinity;
@@ -272,26 +295,20 @@ MyInstance.prototype={
 									var cPos=parseInt(this.gradeValuesMovable[index]);
 									console.log("setting curr pos to "+cPos+" where cleft is "+cPosLeft+" and cright is "+cPosRight);	
 									if(cPos>=cPosRight){
-										cPos=cPosRight-this.resolution;
+										cPos=cPosRight-obj.resolution;
 										bar.subject.config.value=cPos;
-										console.log("cPos=cRight+resolution ==="+(cPosRight)+"-"+(resolution)+"===>"+(cPos));				
+										console.log("cPos=cRight+resolution ==="+(cPosRight)+"-"+(this.resolution)+"===>"+(cPos));				
 										}
 									else if(cPos<=cPosLeft){
-										cPos=cPosLeft+this.resolution;	
-										console.log("cPos=cLeft+resolution ==="+cPosLeft+"+"+resolution+"===>"+cPos);				
+										cPos=cPosLeft+obj.resolution;	
+										console.log("cPos=cLeft+resolution ==="+cPosLeft+"+"+this.resolution+"===>"+cPos);				
 										bar.subject.config.value=cPos;
 										}
-									//	console.log(bar);
-								this.myChart.update();		
-								
-								//end of validate drag......................		
-
-								},
-							onClick: function(e) {
-									console.log("clicked on annotation!!! Nothing to do");
-									}
-								}	
+						
 						},
+
+						
+						
 	 
 	/***************************************************************************************************************************************
 	* 							
@@ -305,12 +322,15 @@ MyInstance.prototype={
 			for(var i=0;i<this.myAnnotationsMovable.length;i++){
 				this.gradeValuesMovable[i]=this.myAnnotationsMovable[i].value;
 				this.gradeValuesFixed[i]=this.myAnnotationsFixed[i].value;						
+			}
 			//Get frequency distibution of students in each partition of grade...............
-			this.gradeBoundsDynamic=this.getGradeFrequency(this.Data,this.gradeValuesMovable);
-			this.gradeBoundsStatic=this.getGradeFrequency(this.Data,this.gradeValuesFixed);
+			this.gradeBoundsDynamic=this.getGradeFrequency(this.gradeValuesMovable);
+			this.gradeBoundsStatic=this.getGradeFrequency(this.gradeValuesFixed);
 			console.log("Dynamic Grade Bounds: "+this.gradeBoundsDynamic);
 			console.log("Static Grade Bounds: "+this.gradeBoundsStatic);
-			}
+			console.log("Static values movable: "+this.gradeValuesMovable);
+			console.log("Static values fixed: "+this.gradeValuesFixed);
+			
 		},
 		
 		
@@ -368,9 +388,10 @@ MyInstance.prototype={
 			
 
 
-		getGradeFrequency:function (dataSet,positions){
+		getGradeFrequency:function (positions){
 			  var result=[];
 			  var min=-Infinity;
+			  var dataSet=this.Data.slice();
 			  dataSet.sort();
 			  var index=0;
 			  var cumSum=0;
