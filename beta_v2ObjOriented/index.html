@@ -3,57 +3,112 @@
 	<head>
 		<title>Inteactive Gradin...</title>
 		<link type="text/css" rel="stylesheet" href="styles/style.css">
-		<link type="text/css" rel="stylesheet" href="styles/bootstrap.css">
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
 	</head>
 	<body>
-		<header>
-			<ul>
-				<li id="tabInput" onclick="tab1()"><img title="Input" alt="Input" src="img/input.png"></li>
-				<li id="tabStat" onclick="tab2()"><img title="Statistics and Plot" alt="Plot" src="img/plot.png"></li>
-				<li id="tabExport" onclick="tab3()"><img title="Export Data" alt="Export" src="img/export.png"></li>
+		<header class=".container-fluid">
+			<ul class="">
+				<li class="" id="tabInput" onclick="tab1()"></li>
+				<li class="" id="tabStat" onclick="tab2()"></li>
+				<li class="" id="tabExport" onclick="tab3()"></li>
 			</ul>
 		</header>
 		<section>
 			<div id="divInput">
 				<center>
-				<ul>
-					<li id="dataFieldContainer">
-						<textarea id="dataField" placeholder="Place Your Data here" onkeyup="obj.setData()" onchange="obj.setData()" required></textarea>
-						Graph resolution<input type="number" id="resolution" placeholder="Enter graph Resolution" >	
-					</li>
-					<li id="">
-						Minimum:<input type="number" id="min" name="min" placeholder="Enter minimum" min="0"  required>
-						Maximum:<input type="number" id="max" name="max" placeholder="Enter maximum" min="0"  required>
-						GradeCount<input type="number" id="gradeCount" placeholder="Enter number of partitions" min="0" max="7"  required>
-					</li>
-					<li id="">
-			      Labels<input class="labels" type="text" id="g1L" value="" >
-						<input class="labels" type="text" id="g2L" value="" >
-						<input class="labels" type="text" id="g3L" value="" >
-						<input class="labels" type="text" id="g4L" value="" >
-						<input class="labels" type="text" id="g5L" value="" >
-						<input class="labels" type="text" id="g6L" value="" >
-						<br/>
-				 Credits<input class="values" type="text" id="g1V" value="" >
-						<input class="values" type="text" id="g2V" value="" >
-						<input class="values" type="text" id="g3V" value="" >
-						<input class="values" type="text" id="g4V" value="" >
-						<input class="values" type="text" id="g5V" value="" >
-						<input class="values" type="text" id="g6V" value="" >
-						<input class="values" type="text" id="g7V" value="" ><br/><br/><br/>
-		
-					</li>
+					<ul class="inputClass row11">
+						<li id="dataFieldContainer">
+							<textarea id="dataField" placeholder="Place Your Data here" onkeyup="obj.setData()" onchange="obj.setData()" required></textarea>
+						</li>
+					</ul>
+					<ul class="inputClass row12">
+						<li>
+							Data Cont: <p id="dataCount"></p>
+						</li>
+						<li>
+							Average Marks: <p id="avgMarks"></p>
+						</li>
+					</ul>
+					<ul class="inputClass row13">
+						<li id="resolutionFieldContainer">
+							<input type="number" id="resolution" placeholder="Enter graph Resolution" max="1" min="0.1" step="0.1">
+						</li>
+						<li id="gradeModeSelector">
+							<select id="gradingModel">
+								<option value="iitbDefault" onclick="hideOther('iitbDefault');">IIT-B Default</option>
+								<option value="iitbAbsolute" onclick="hideOther('iitbAbsolute');">IIT-B Absolute</option>
+								<option value="custom" onclick="hideOther('custom');">Custom</option>
+							</select>
+						</li>
+					<script>
+						console.log("after this");
+						function hideOther(option){
+							console.log("hiding all other except needed block");
+							var e=document.getElementsByClassName("row14");
+							for(var i=0;i<e.length;i++){
+								if(e[i].id==option)
+									e[i].style.display="block";
+								else
+									e[i].style.display="none";
+								}
+						}
+					</script>
+					</ul>
+					<ul class="inputClass row14" id="iitbDefault">
+						<li id="iitbDefaultRow1">Reference Value:
+							<input type="number" id="iitbDefaultRefValue" placeholder="Enter A Grade Boundary" max="" min="0" step="1">
+						</li>
+						
+					</ul>
+					<ul class="inputClass row14" id="iitbAbsolute">
+						<li>Absolute</li>
+					</ul>
+					<ul class="inputClass row14" id="custom">
+						<ul id="customRow1">
+							<li>Minimum:<input type="number" id="min"  placeholder="Enter minimum" min="0"  required></li>
+							<li>Maximum:<input type="number" id="max"  placeholder="Enter maximum" min="0"  required></li>
+							<li>GradeCount:<input type="number" id="gradeCount"  placeholder="Enter Grade Count" min="1" max="10"  required></li>
+						</ul>
+						<ul id="customRow2">Labels:
+							<input class="labels" type="text" id="g1L" value="" >
+							<input class="labels" type="text" id="g2L" value="" >
+							<input class="labels" type="text" id="g3L" value="" >
+							<input class="labels" type="text" id="g4L" value="" >
+							<input class="labels" type="text" id="g5L" value="" >
+							<input class="labels" type="text" id="g6L" value="" >
+							<input class="labels" type="text" id="g7L" value="" >
+							<input class="labels" type="text" id="g8L" value="" >
+							<input class="labels" type="text" id="g9L" value="" >
+							<input class="labels" type="text" id="g10L" value="" >
+						</ul>
+						<ul id="customRow3">Grades:
+							<input class="values" type="text" id="g1V" value="" >
+							<input class="values" type="text" id="g2V" value="" >
+							<input class="values" type="text" id="g3V" value="" >
+							<input class="values" type="text" id="g4V" value="" >
+							<input class="values" type="text" id="g5V" value="" >
+							<input class="values" type="text" id="g6V" value="" >
+							<input class="values" type="text" id="g7V" value="" >
+							<input class="values" type="text" id="g8V" value="" >
+							<input class="values" type="text" id="g9V" value="" >
+							<input class="values" type="text" id="g10V" value="" >
+						</ul>
+					
+					</ul>
 				</ul>
-					Data Cont: <p id="dataCount"></p><br/><br>
-					Average Marks: <p id="avgMarks"></p><br/><br/>
 					<button onclick="obj.confirmData()">Confirm Data</button><br/>
 				</center>
 			</div>
+			
+			
 			<div id="divStat">
-					<button id='resetZoom' onclick="obj.myChart.resetZoom()">Reset</button>
+					<button id="resetZoom" onclick="obj.myChart.resetZoom()">Reset</button>
 					<canvas id="myChart" width="100%" height="100%"></canvas>
 			</div>
+			
+			
 			<div id="divExport">
 				<center>
 					<br/></br/><br/><h3>Stats</h3>
@@ -164,7 +219,6 @@
 			
 		</footer>
 		<script type="text/javascript" src="scripts/Chart.js"></script>
-		<script type="text/javascript" src="scripts/Chart.bundle.js"></script>
 		<script type="text/javascript" src="scripts/chartjs-plugin-annotation.js"></script>
 		<script type="text/javascript" src="scripts/chartjs-plugin-draggable.js"></script>
 		<script type="text/javascript"  src="scripts/chartjs-plugin-zoom.js"></script>		
