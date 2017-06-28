@@ -8,12 +8,7 @@
 
 	</head>
 	<body>
-		<header class=".container-fluid">
-			<ul class="">
-				<li class="" id="tabInput" onclick="tab1()"></li>
-				<li class="" id="tabStat" onclick="tab2()"></li>
-				<li class="" id="tabExport" onclick="tab3()"></li>
-			</ul>
+		
 		</header>
 		<section>
 			<div id="divInput">
@@ -33,7 +28,7 @@
 					</ul>
 					<ul class="inputClass row13">
 						<li id="resolutionFieldContainer">
-							<input type="number" id="resolution" placeholder="Enter graph Resolution" max="1" min="0.1" step="0.1" value="1">
+							<input type="number" id="resolution" placeholder="Enter graph Resolution" max="1" min="0.1" step="0.1">
 						</li>
 						<li id="gradeModeSelector">
 							<select id="gradingModel">
@@ -99,119 +94,6 @@
 					</ul>
 				</ul>
 					<button onclick="obj.confirmData()">Confirm Data</button><br/>
-				</center>
-			</div>
-			
-			
-			<div id="divStat">
-					<button id="resetZoom" onclick="obj.myChart.resetZoom()">Reset</button>
-					<canvas id="myChart" width="100%" height="100%"></canvas>
-			</div>
-			
-			
-			<div id="divExport">
-				<center>
-					<br/></br/><br/><h3>Stats</h3>
-					
-					<table>
-						<tr id="row0">
-							<th>Grade</th>
-							<th>Credits</th>
-							<th>Lower bound</th>
-							<th>Upper bound</th>
-							<th>Freq</th>
-							<th>New Lower bound</th>
-							<th>New Upper bound</th>
-							<th>New Frequency</th>
-						</tr>
-						<tr class="statsTableRows" id="row1">
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr class="statsTableRows" id="row2">
-							
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr class="statsTableRows" id="row3">
-							
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr class="statsTableRows" id="row4">
-							
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr class="statsTableRows" id="row5">
-							
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr class="statsTableRows" id="row6">
-							
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr class="statsTableRows" id="row7">
-							
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr class="statsTableRows" id="row8">
-							
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-							<td></td>
-						</tr>
-					</table>
 				</center>
 			</div>
 		</section>
