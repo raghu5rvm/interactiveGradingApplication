@@ -8,7 +8,7 @@
 
 	</head>
 	<body>
-		<header class=".container-fluid">
+		<header class="">
 			<ul class="">
 				<li class="" id="tabInput" onclick="tab1()"></li>
 				<li class="" id="tabStat" onclick="tab2()"></li>
@@ -33,28 +33,16 @@
 					</ul>
 					<ul class="inputClass row13">
 						<li id="resolutionFieldContainer">
-							<input type="number" id="resolution" placeholder="Enter graph Resolution" max="1" min="0.1" step="0.1" value="1">
+							<input type="number" id="resolution" placeholder="Enter graph Resolution" max="1" min="0.1" step="0.1">
 						</li>
 						<li id="gradeModeSelector">
 							<select id="gradingModel">
 								<option value="iitbDefault" onclick="hideOther('iitbDefault');">IIT-B Default</option>
-								<option value="iitbAbsolute" onclick="hideOther('iitbAbsolute');">IIT-B Absolute</option>
+								<option value="iitbAbsolute" onclick="hideOther('iitbAbsolute');" selected>IIT-B Absolute</option>
 								<option value="custom" onclick="hideOther('custom');">Custom</option>
+								<option value="custom2" onclick="hideOther('custom2');">Custom2</option>
 							</select>
 						</li>
-					<script>
-						console.log("after this");
-						function hideOther(option){
-							console.log("hiding all other except needed block");
-							var e=document.getElementsByClassName("row14");
-							for(var i=0;i<e.length;i++){
-								if(e[i].id==option)
-									e[i].style.display="block";
-								else
-									e[i].style.display="none";
-								}
-						}
-					</script>
 					</ul>
 					<ul class="inputClass row14" id="iitbDefault">
 						<li id="iitbDefaultRow1">Reference Value:
@@ -63,15 +51,16 @@
 						
 					</ul>
 					<ul class="inputClass row14" id="iitbAbsolute">
-						<li>Absolute</li>
+						
 					</ul>
 					<ul class="inputClass row14" id="custom">
-						<ul id="customRow1">
+						<ul id="customRow11">
 							<li>Minimum:<input type="number" id="min"  placeholder="Enter minimum" min="0"  required></li>
 							<li>Maximum:<input type="number" id="max"  placeholder="Enter maximum" min="0"  required></li>
-							<li>GradeCount:<input type="number" id="gradeCount"  placeholder="Enter Grade Count" min="1" max="10"  required></li>
+							<br/>
+							<li>GradeCount:<input type="number" id="gradeCount"  placeholder="Enter Grade Count" min="1" max="10" onchange="showCreditEntryBox(this.value,1)" onkeyup="showCreditEntryBox(this.value,1)" required></li>
 						</ul>
-						<ul id="customRow2">Labels:
+						<ul id="customRow12">Labels:
 							<input class="labels" type="text" id="g1L" value="" >
 							<input class="labels" type="text" id="g2L" value="" >
 							<input class="labels" type="text" id="g3L" value="" >
@@ -83,7 +72,7 @@
 							<input class="labels" type="text" id="g9L" value="" >
 							<input class="labels" type="text" id="g10L" value="" >
 						</ul>
-						<ul id="customRow3">Grades:
+						<ul id="customRow13">Grades:
 							<input class="values" type="text" id="g1V" value="" >
 							<input class="values" type="text" id="g2V" value="" >
 							<input class="values" type="text" id="g3V" value="" >
@@ -97,6 +86,50 @@
 						</ul>
 					
 					</ul>
+					<ul class="inputClass row14" id="custom2">
+						<ul id="customRow21">
+							<br/>
+							<li>GradeCount:<input type="number" id="c2gradeCount"  placeholder="Enter Grade Count" min="1" max="10" onchange="showCreditEntryBox(this.value,2)" onkeyup="showCreditEntryBox(this.value,2)" required></li>
+						</ul>
+						<ul id="customRow22">Labels:
+							<input class="labels" type="text" id="c2g1L" value="" >
+							<input class="labels" type="text" id="c2g2L" value="" >
+							<input class="labels" type="text" id="c2g3L" value="" >
+							<input class="labels" type="text" id="c2g4L" value="" >
+							<input class="labels" type="text" id="c2g5L" value="" >
+							<input class="labels" type="text" id="c2g6L" value="" >
+							<input class="labels" type="text" id="c2g7L" value="" >
+							<input class="labels" type="text" id="c2g8L" value="" >
+							<input class="labels" type="text" id="c2g9L" value="" >
+							<input class="labels" type="text" id="c2g10L" value="" >
+						</ul>
+						<ul id="customRow23">Grades:
+							<input class="values" type="text" id="c2g1V" value="" >
+							<input class="values" type="text" id="c2g2V" value="" >
+							<input class="values" type="text" id="c2g3V" value="" >
+							<input class="values" type="text" id="c2g4V" value="" >
+							<input class="values" type="text" id="c2g5V" value="" >
+							<input class="values" type="text" id="c2g6V" value="" >
+							<input class="values" type="text" id="c2g7V" value="" >
+							<input class="values" type="text" id="c2g8V" value="" >
+							<input class="values" type="text" id="c2g9V" value="" >
+							<input class="values" type="text" id="c2g10V" value="" >
+						</ul>
+						<ul id="customRow24">Grades:
+							<input class="values" type="text" id="c2g1B" value="" >
+							<input class="values" type="text" id="c2g2B" value="" >
+							<input class="values" type="text" id="c2g3B" value="" >
+							<input class="values" type="text" id="c2g4B" value="" >
+							<input class="values" type="text" id="c2g5B" value="" >
+							<input class="values" type="text" id="c2g6B" value="" >
+							<input class="values" type="text" id="c2g7B" value="" >
+							<input class="values" type="text" id="c2g8B" value="" >
+							<input class="values" type="text" id="c2g9B" value="" >
+							<input class="values" type="text" id="c2g10B" value="" >
+						</ul>
+						
+					</ul>
+
 				</ul>
 					<button onclick="obj.confirmData()">Confirm Data</button><br/>
 				</center>
@@ -111,8 +144,16 @@
 			
 			<div id="divExport">
 				<center>
-					<br/></br/><br/><h3>Stats</h3>
+					<section id="pieStats">
+						<canvas id="pie1"></canvas>
+						<canvas id="pie2"></canvas>
+					</section>
 					
+					<br/>
+					<br/>
+					<hr>
+					<br/>
+					<br/>
 					<table>
 						<tr id="row0">
 							<th>Grade</th>
@@ -202,6 +243,43 @@
 						</tr>
 						<tr class="statsTableRows" id="row8">
 							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="statsTableRows" id="row9">
+						
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="statsTableRows" id="row10">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+
+					</table>
+					
+					<table>
+						<tr class="avgTable">
 							<td></td>
 							<td></td>
 							<td></td>

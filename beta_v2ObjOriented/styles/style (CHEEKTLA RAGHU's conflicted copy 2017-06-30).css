@@ -73,20 +73,13 @@ width:80%;
 height:50px;
 display:inine-block;
 margin:10px;
-border:0px solid black;
+border:0.3px solid black;
 text-align:center;
-background:#9CCEFF;
-border-radius:10px;
--webkit-appearance: none;
--moz-appearance: none;
-}
-select {
-background:url(arr.png) no-repeat right #9cceff;
 }
 
 #dataFieldContainer{
 width:75%;
-height:200px;
+height:100px;
 border:0px solid black;
 }
 textarea{
@@ -118,9 +111,6 @@ width:49%;
 .row14{
 display:none;
 }
-#iitbAbsolute {
-display:block;
-}
 
 button {
 width:200px;
@@ -139,77 +129,23 @@ display:inline;
 float:right;
 margin-right:50px;
 }
-#myChart {
-max-width:90%;
-width:90%
-}
-#pieStats{
-width:95%;
-height:464px;
-border:0px solid black;
-display:block;
-padding:15px 10px;
-contain: content;
-max-height:;
-max-width:95%;
-}
-#pie1{
-border:0px solid red;
-width:45%;
-height:435px;
-float:left;
-max-height:420px;
-max-width:48%;
-background:white;
-opacity:0.7;
-}
-#pie2{
-border:0px solid red;
-width:45%;
-height:430px;
-float:right;
-max-height:420px;
-max-width:48%;
-background:white;
-opacity:0.7;
-transition:all 0.5s ease;
-}
-#pie1:hover, #pie2:hover{
-transition:all 0.8s ease;
-opacity:1;
-}
-
-
 table {
 display:block;
 border:0px solid black;
 }
-th{
+th,td{
 display:inline-block;
-padding:20px 5px;
+padding:10px 0px;
 width:120px;
 border:1px solid #4d4d4d;
-background:#4D4D4D;
+margin:0.5px 5px;
 font-size:12px;
-color:white;
 }
 td{
-display:inline-block;
-padding:15px 5px;
-width:120px;
-border:1px solid #4d4d4d;
-font-size:12px;
-background:#Ffffff;
 color:#008000;
-transition:all 0.3s ease;
 }
-td:hover{
-transition:all 0.5s ease;
-background:#f2f2f2
-}
-.avgTable td{
-border:1px;
-}
+
+
 
 
 

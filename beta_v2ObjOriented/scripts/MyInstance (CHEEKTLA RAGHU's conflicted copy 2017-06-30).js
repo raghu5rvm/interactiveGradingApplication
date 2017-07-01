@@ -5,18 +5,16 @@ function MyInstance(){
 	 * ****************************************************************/
 	 //user inputs......................................................
 	this.Data=[];
-	this.dataFrequency=[];
+	this.dataFrequency=[0]*100;
 	this.resolution;
-	this.gradeMode="iitbAbsolute";
+	this.gradeMode="iitbDefault";
 	
 	//variables in all modes............................................
 	this.gradeCount;
 	this.gradeLabels=[];
 	this.gradeCredits=[];
-	
 	//iitb Default variables............................................
 	this.refValue;
-	
 	
 	//custom model variables............................................
 	this.maxData=100;
@@ -24,10 +22,8 @@ function MyInstance(){
 	this.min;
 	this.max;
 	
-	
 	//flag
 	this.hasData=0;
-	
 	
 	//other variables
 	this.average;
@@ -39,9 +35,6 @@ function MyInstance(){
 	this.gradeValuesFixed=[];
 	this.gradeFrequencyDynamic=[];
 	this.gradeFrequencyStatic=[];
-	
-	this.pie1=null;
-	this.pie2=null;
 
 }	
 
@@ -68,13 +61,12 @@ MyInstance.prototype={
 		 	if(this.myChart!=null){
 						this.myChart.destroy();
 						this.myChart=null;
-						alert("chart destroyed");
 						}
 			this.gradeMode=document.getElementById('gradingModel').value;
-			console.log("grade mode is now " + this.gradeMode);
+			console.log("grade mode is now "+this.gradeMode);
 
 		 //confirm variables of iitb default mode.......................
-			if(this.gradeMode == "iitbDefault"){
+			if(this.gradeMode=="iitbDefault"){
 				
 				console.log("control is in confirm data iitbDefault mode");
 				//......dd[=rValue*0.4].....|.....cd.....|.....cc.....|......bc.......|......bb......|......ab....|......aa......|rValue|......ap.....
@@ -89,7 +81,7 @@ MyInstance.prototype={
 				this.min=parseFloat(document.getElementById("min").value);
 				this.gradeCount=9;
 				this.gradeLabels=["FF","DD","CD","CC","BC","BB","AB","AA","AP"];
-				this.gradeCredits=[0,4,5,6,7,8,9,10,10];			
+				this.gradeCredits=[0,3,4,5,6,7,8,9,10,10];			
 				var delta=(this.refValue-(this.refValue*0.4))/7;
 				var least=(this.refValue*0.4);
 				console.log("grade count = "+this.gradeCount+" ref value= "+this.refValue+" delta "+ delta+" least = "+least );
@@ -102,7 +94,6 @@ MyInstance.prototype={
 					this.gradeValuesFixed[i]=Math.floor(least+(i*delta));
 					this.gradeValuesMovable[i]=Math.floor(least+(i*delta));
 					}
-				
 				console.log(" grade values from calculation is "+this.gradeValuesFixed);			
 				this.hasData=1;
 				}
@@ -116,8 +107,8 @@ MyInstance.prototype={
 							document.getElementById("resolution").focus();
 							}
 				console.log("control is in confirm data iitbAbsolute mode");
-				this.gradeCount=9;
-				this.gradeLabels=["FF","DD","CD","CC","BC","BB","AB","AA","AP"];
+				this.gradeCount=8;
+				this.gradeLabels=["DD","CD","CC","BC","BB","AB","AA","AP"];
 				this.gradeCredits=[0,4,5,6,7,8,9,10,10];			
 				this.gradeValuesFixed=[30,40,50,60,70,80,90,100];
 				this.gradeValuesMovable=[30,40,50,60,70,80,90,100];
@@ -129,7 +120,8 @@ MyInstance.prototype={
 				
 			//confirm variables of custom mode..............................
 			else if(this.gradeMode=="custom"){
-					 				
+					 
+				
 						console.log("control is in confirm data custom mode");
 						//fetch value of minimum which is lower bound in partitioning grades.(may not be the least value in graph)
 						this.min=document.getElementById("min").value;
@@ -157,8 +149,7 @@ MyInstance.prototype={
 							}
 						//fetch labels and credits from user........................
 						this.gradeLabels=[];
-						this.gradeCredits=[];
-						console.log("grade count is "+this.gradeCount);
+						this.gradeCredits=[]
 						for(var i=0;i<this.gradeCount;i++){
 								var lId="g"+(parseInt(i)+1)+"L";
 								var vId="g"+(parseInt(i)+1)+"V";
@@ -168,19 +159,14 @@ MyInstance.prototype={
 								this.gradeLabels[i]=document.getElementById(lId).value;
 								console.log(	this.gradeLabels[i]   );			
 							}	
-						this.gradeCredits.unshift(0);
-						this.gradeLabels.unshift("F");
-						
-						
 						this.gradeValuesMovable=[];
 						this.gradeValuesFixed=[];
 						
 						var delta=( (this.max-this.min) / this.gradeCount );
 						for(var i=0;i<this.gradeCount;i++){
-								this.gradeValuesMovable[i]=Math.round(this.min+(delta*(i+1)));
-								this.gradeValuesFixed[i]=Math.round(this.min+(delta*(i+1)));
+								this.gradeValuesMovable[i]=Math.round(this.min+(delta*i));
+								this.gradeValuesFixed[i]=Math.round(this.min+(delta*i));
 							}
-						
 						console.log("grade values are "+this.gradeValuesFixed+" delta is "+ delta);
 						//validation of all inputs and report to user the same......
 						//check once for any non validated variables before confirming	
@@ -196,52 +182,8 @@ MyInstance.prototype={
 						console.log("Grade Labels are "+this.gradeLabels+"\nGrade Credits: "+this.gradeCredits);
 				}
 			//end of custom mode code....................................
-				else if(this.gradeMode=="custom2"){
-					 
-						console.log("control is in confirm data custom2 mode");
-						//fetch number of grades to partition 	
-						this.gradeCount=document.getElementById("c2gradeCount").value;
-						if(isNaN(this.c2gradeCount)){
-							alert("Number of Grades should be a number. Check input");
-							document.getElementById("c2gradeCount").focus();
-							}
-						//fetch resolution which would be the minimum unit in x-axis
-						this.resolution=parseFloat(document.getElementById("resolution").value);
-						if(isNaN(this.resolution)){
-							alert("Resolution should be a numbercheck input");
-							document.getElementById("resolution").focus();
-							}
-						//fetch labels and credits from user........................
-						this.gradeLabels=[];
-						this.gradeCredits=[];
-						this.gradeValuesMovable=[];
-						this.gradeValuesFixed=[];
-						for(var i=0;i<this.c2gradeCount;i++){
-								var lId="c2g"+(parseInt(i)+1)+"L";
-								var vId="c2g"+(parseInt(i)+1)+"V";
-								var bId="c2g"+(parseInt(i)+1)+"B";
-								console.log("picking from (g/c/b)-id : "+vId);
-								this.gradeCredits[i]=document.getElementById(vId).value;
-								this.gradeLabels[i]=document.getElementById(lId).value;
-								this.gradeValuesMovable[i]=document.getElementById(bId).value;
-								this.gradeValuesFixed[i]=document.getElementById(bId).value;
-							}	
-						this.gradeCredits.unshift(0);
-						this.gradeLabels.unshift("F");
-												
-						//validation of all inputs and report to user the same......
-						//check once for any non validated variables before confirming	
-						if( isNaN(this.c2gradeCount) || isNaN(this.resolution))
-							{
-							console.log("Inputs are not completely validated.");
-							this.hasData=0;
-								}
-							this.hasData=1;
-							
-							
-						console.log("Grade Labels are "+this.gradeLabels+"\nGrade Credits: "+this.gradeCredits);
-				}
-				}
+		
+		}
 		
 		},
 	 /*******************************************************************
@@ -296,9 +238,6 @@ MyInstance.prototype={
 				//set height and width of canvas........................
 				ctx.canvas.width = window.innerWidth*0.9;
 				ctx.canvas.height = window.innerHeight*0.8;
-				ctx.canvas.parentNode.style.width = window.innerWidth*0.9;
-				ctx.canvas.parentNode.style.height = window.innerHeight*0.5;
-
 
 			var labels=[];
 			var bgColors=[];
@@ -314,20 +253,18 @@ MyInstance.prototype={
 			this.dataFrequency=[];
 			for(var i=0;i<120;i++)
 				this.dataFrequency[i]=0;
-			var yMax=0;
 			for(var i=0;i<arrangedData.length;i++){
 					this.dataFrequency[Math.round(arrangedData[i])%120]++;
-					if(this.dataFrequency[Math.round(arrangedData[i])%120] > yMax)
-						yMax=this.dataFrequency[Math.round(arrangedData[i])%120];					
+				//labels[j]=i;
 				}
 			//make annotations which are static and label them...	
 			console.log(""+this.gradeValuesFixed)
-			for(var i=0;i<(this.gradeCount-1);i++) {
+			for(var i=0;i<(this.gradeCount-1);i++){
 				this.myAnnotationsFixed[i]=this.makeAnnotation(this.gradeValuesFixed[i],this.gradeLabels[i+1],false,"#008000",5,i);
 			}
 			
 			//make annotations which are dynamic and label them...
-			for(var i=0;i<(this.gradeCount-1);i++) {
+			for(var i=0;i<(this.gradeCount-1);i++){
 				this.myAnnotationsMovable[i]=this.makeAnnotation(this.gradeValuesMovable[i],this.gradeLabels[i+1],true,"#F15454",7,i);
 			}
 
@@ -350,7 +287,7 @@ MyInstance.prototype={
 						},
 						options: {     responsive:false,
 									   title: {        display: true,        text: 'Interactive Grading application'    },
-									  scales: {       xAxes: [{suggestedMax: this.maxData+10,position: 'bottom',gridLines: {zeroLineColor: "rgba(0,255,0,1)"},scaleLabel: {display: true,labelString: 'Marks' }     }],        
+									  scales: {       xAxes: [{suggestedMin: 0.5,position: 'bottom',gridLines: {zeroLineColor: "rgba(0,255,0,1)"},scaleLabel: {display: true,labelString: 'Marks' },ticks:{	stepSize:0.5}     }],        
 													  yAxes: [{position: 'left',gridLines: {zeroLineColor: "rgba(0,255,0,1)"}, scaleLabel: {display: true,labelString: 'Frequency'} 		}]    } ,	
 								  annotation: {
 												events: ['drag'],
@@ -488,69 +425,24 @@ MyInstance.prototype={
 		},
 		
 		
-
-
-		showPieStats:function(){
-			var pie1Ctx=document.getElementById("pie1").getContext("2d");
-			var pie2Ctx=document.getElementById("pie2").getContext("2d");
-				pie1Ctx.canvas.width = document.getElementById("pieStats").width*0.4;
-				pie1Ctx.canvas.height =document.getElementById("pieStats").height*0.5;
-				pie2Ctx.canvas.width = document.getElementById("pieStats").width*0.4;
-				pie2Ctx.canvas.height = document.getElementById("pieStats").height*0.5;
-				pie1Ctx.canvas.parentNode.style.height = '464px';
-				pie2Ctx.canvas.parentNode.style.height = '464px';
-				pie1Ctx.canvas.parentNode.style.width = window.innerWidth*0.45;
-				pie2Ctx.canvas.parentNode.style.width = window.innerWidth*0.45;
-
-			var bg=[];
-			for(var i=0;i<this.gradeLabels.length;i++){
-				bg[i]='#'+Math.floor(Math.random()*16777215).toString(16);
+		
+		getAverageGPA:function (gradeDist){
+			console.log("calculating averagae GPA");
+			var student_count=0,
+				wsum=0;
+			for(var i=0;i<gradeDist.length;i++){
+				console.log("weight is now "+this.gradeCredits[i]);
+				student_count+=gradeDist[i];
+				console.log("student count is now "+student_count);
+				wsum+=this.gradeCredits[i]*gradeDist[i];
+				console.log("weighted sum is now "+wsum);
 				}
-			this.pie1 = new Chart(pie1Ctx, {
-						responsive:false,
-						maintainAspectRatio:false,
-						type:"pie",
-						data:  {
-							labels: this.gradeLabels,
-							datasets: [{
-								data:	this.gradeFrequencyStatic,
-								backgroundColor:bg
-							}]
-						},
-						options: {
-							legend:{
-								position:'left'
-								},
-							zoom:{
-								enabled:false
-								}
-							}
-							
-					});		
-						
-			this.pie2 = new Chart(pie2Ctx, {
-						responsive:false,
-						maintainAspectRatio:false,
-						type:"pie",
-						data:  {
-							labels: this.gradeLabels,
-							datasets: [{
-						//		label: 	'Initial result',
-								data:	this.gradeFrequencyDynamic,
-								backgroundColor:bg
-							}]
-						},
-						options: {
-							legend:{
-								position:'left'
-								},
-							zoom:{
-								enabled:false
-								}
-							}	
-					});			
+			
+			console.log((wsum/student_count).toFixed(3));
+			return (wsum/student_count).toFixed(3);
+		},
 
-			},
+
 		
 		showStats:function (){
 			
@@ -580,16 +472,13 @@ MyInstance.prototype={
 				tableRow[6].innerHTML=(this.gradeValuesMovable[i+1]);
 				tableRow[7].innerHTML=(this.gradeFrequencyDynamic[i]);		
 				}
-		
-			for(var i=this.gradeCount;i<tableRows.length;i++){
+			var tableRow=tableRows[this.gradeCount].children;
+			tableRow[4].innerHTML=this.getAverageGPA(this.gradeValuesFixed);
+			tableRow[7].innerHTML=this.getAverageGPA(this.gradeValuesMovable);
+			
+			for(var i=this.gradeCount+1;i<tableRows.length;i++){
 				tableRows[i].style.display="none";
 				}
-			var avgTable=document.getElementsByClassName("avgTable")[0].children;
-				avgTable[3].innerHTML="Average GPA";
-				avgTable[4].innerHTML=this.getAverageGPA(this.gradeFrequencyStatic);
-				avgTable[6].innerHTML="New Average GPA";
-				avgTable[7].innerHTML=this.getAverageGPA(this.gradeFrequencyDynamic);
-			
 			this.gradeValuesFixed.shift();
 			this.gradeValuesFixed.pop();;
 			
@@ -628,26 +517,6 @@ MyInstance.prototype={
 			  return result;
 			},
 			    
-					
-		getAverageGPA:function (gradeDist){
-			console.log(" grade dist :"+gradeDist);
-			console.log("calculating averagae GPA");
-			var student_count=0,
-				wsum=0;
-			for(var i=0;i<gradeDist.length;i++){
-				console.log("weight is now "+this.gradeCredits[i]);
-				student_count+=gradeDist[i];
-				console.log("student count is now "+student_count);
-				wsum+=this.gradeCredits[i]*gradeDist[i];
-				console.log("weighted sum is now "+wsum);
-				}
-			
-			console.log((wsum/student_count).toFixed(3));
-			return (wsum/student_count).toFixed(3);
-		},
-
-
-
 		exportData:function(){
 			  var a = document.getElementById("a");
 			  var file = new Blob([this.Data], {type: 'text/plain'});

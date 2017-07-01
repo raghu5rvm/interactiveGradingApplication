@@ -4,7 +4,9 @@
 document.getElementById("divInput").style.display="block";
 document.getElementById("divStat").style.display="none";
 document.getElementById("divExport").style.display="none";
+
 function tab1() {
+	hideOther(document.getElementById("gradingModel").value)
 	console.log("inside tab1 function");
 	document.getElementById("divInput").style.display="block";
 	document.getElementById("divStat").style.display="none";
