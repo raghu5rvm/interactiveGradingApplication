@@ -34,6 +34,14 @@ function changeChartBg(color){
 	obj.myChart.update();
 	}
 function changeChartType(type){
+	if(type=="bar"){
+		obj.chartBg=[];
+		for(var i=0;i<obj.dataFrequency.length;i++)
+			obj.chartBg[i]='#'+Math.floor(Math.random()*16777215).toString(16);
+		}
+	else if(type=="line"){
+		obj.chartBg=['#7F7F7F'];
+		}
 	obj.chartType=type;
 	obj.myChart.destroy();
 	obj.plotData();

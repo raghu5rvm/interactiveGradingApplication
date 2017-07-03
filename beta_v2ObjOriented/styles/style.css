@@ -29,7 +29,7 @@ height:70px;
 border:0px solid green;
 opacity:0.5;
 transition:all 0.6s;
-box-shadow:0px 2px 2px white;
+box-shadow:0px 2px 2px #8C8CEE;
 
 }
 header ul li:hover {

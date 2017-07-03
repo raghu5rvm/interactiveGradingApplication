@@ -451,7 +451,7 @@ MyInstance.prototype={
 						if(i==0){
 							if(val>=this.myAnnotationsMovable[1].value){
 									this.myAnnotationsMovable[0].value=this.myAnnotationsMovable[1].value-1;
-									e.value=this.myAnnotationsMovable[i+1].value-1;
+									e.value=this.myAnnotationsMovable[1].value-1;
 								}
 							else{	
 								this.gradeValuesMovable[parseInt(index)]=parseFloat(newVal);
@@ -459,23 +459,23 @@ MyInstance.prototype={
 								}
 							}
 						else if(i>0 && i<this.myAnnotationsMovable.length-1){
-							if(val>this.myAnnotationsMovable[i+1].value){
+							if(val>=this.myAnnotationsMovable[i+1].value){
 								this.myAnnotationsMovable[i]=this.myAnnotationsMovable[i+1]-1;
 								e.value=this.myAnnotationsMovable[i+1]-1;
 								}
-							else if(val<this.myAnnotationsMovable[i-1].value){
+							else if(val<=this.myAnnotationsMovable[i-1].value){
 								this.myAnnotationsMovable[i].value=this.myAnnotationsMovable[i-1].value+1
-								e.this.myAnnotationsMovable[i-1].value+1
+								this.myAnnotationsMovable[i-1].value+1
 								}
 							else{
 								this.gradeValuesMovable[parseInt(index)]=parseFloat(newVal);
-								this.myAnnotationsMovable[parseInt(index)].value=parseInt(newVal);
+								e.value=this.myAnnotationsMovable[parseInt(index)].value=parseInt(newVal);
 								}
 							}
 						else if(i==this.myAnnotationsMovable.length-1){
-							if(val<this.myAnnotationsMovable[i-1].value){
+							if(val<=this.myAnnotationsMovable[i-1].value){
 									this.myAnnotationsMovable[i].value=this.myAnnotationsMovable[i-1].value+1
-									e.this.myAnnotationsMovable[i-1].value+1;
+									e.value=this.myAnnotationsMovable[i-1].value+1;
 								}
 							else{
 								this.gradeValuesMovable[parseInt(index)]=parseFloat(newVal);
@@ -558,6 +558,21 @@ MyInstance.prototype={
 								//begin validating drag movement........
 								obj.getStats();	
 								obj.validateBarMovement(e);
+								
+								
+								var Lboxes=document.getElementsByClassName("curLabels");
+								var Vboxes=document.getElementsByClassName("curVals");
+								for(var i=0;i<obj.gradeLabels.length-1;i++){
+									Lboxes[i].style.display="inline-block";
+									Vboxes[i].style.display="inline-block";
+									Lboxes[i].innerHTML=obj.gradeLabels[i]+":";
+									Vboxes[i].value=parseInt(obj.gradeValuesMovable[i]);
+									}
+								for(var i=obj.gradeLabels.length-1;i<10;i++){
+									Lboxes[i].style.display="none";
+									Vboxes[i].style.display="none";
+									}
+									
 								obj.myChart.update();
 								console.log("chart updated");
 								//end of validate drag......................		
