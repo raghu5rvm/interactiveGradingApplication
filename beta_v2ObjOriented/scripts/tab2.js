@@ -4,6 +4,11 @@
  * ********************************************************************/
 var visit=0;
 function tab2(){
+	//remove later
+	if(visit!=3){
+		obj.confirmData();
+		visit=0;
+	}
 	if(obj.hasData==0)
 		alert("Fill all fields with valid data before plotting!!!")
 	else{
@@ -12,8 +17,9 @@ function tab2(){
 		document.getElementById("divStat").style.display="block";
 		document.getElementById("divExport").style.display="none";
 		//obj.getStats();
-		if(obj.myChart==null){
+		if(obj.myChart==null && visit==0){
 			visit=1;
+			obj.confirmData();
 			obj.plotData();
 		}
 		else{
@@ -23,3 +29,12 @@ function tab2(){
 		document.getElementById("tabExport").style.animation="1s flash linear infinite";
 }
 }
+function changeChartBg(color){
+	obj.chartBg[0]=color;
+	obj.myChart.update();
+	}
+function changeChartType(type){
+	obj.chartType=type;
+	obj.myChart.destroy();
+	obj.plotData();
+	}

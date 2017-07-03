@@ -9,20 +9,28 @@ max-width:100%;
 height:100%;
 }
 header {
-margin:3% 1%;
 border:0px solid #4D4D4D;
 display:block;
+position:fixed;
+height:100px;
+width:100%;
+z-index:1000;
+background:;
+left:0;
+box-shadow:0px 2px 2px #E6E6FA;
 }
 header ul {
-border-bottom:2px solid #4D4D4D;
+border-bottom:0px solid #4D4D4D;
 }
 header ul li {
 display:inline-block;
 width:32%;
 height:70px;
-border:1px solid green;
+border:0px solid green;
 opacity:0.5;
 transition:all 0.6s;
+box-shadow:0px 2px 2px white;
+
 }
 header ul li:hover {
 opacity:1;
@@ -35,7 +43,8 @@ background-position:center center;
 background-size:15%;
 }
 #tabStat {
-background-image:url("../img/plot.png");
+background-image:
+url("../img/plot.png");
 background-repeat:no-repeat;
 background-position:center center;
 background-size:15%;
@@ -65,6 +74,28 @@ list-style-type:none;
 }
 
 /*							Input tab									*/
+#divInput div{
+display:inline-block;
+}
+#leftInput{
+border:0px solid black;
+width:35%;
+height:750px;
+position:absolute;
+}
+#rightInput{
+position:absolute;
+width:60%;
+height:700px;
+border:0px solid black;
+}
+#leftInput fieldset,#rightInput fieldset {
+height:750px;
+margin-bottom:5%;
+}
+.inputClass {
+margin-left:-5%;
+}
 ul li{
 display:inline-block;
 }
@@ -83,7 +114,17 @@ border-radius:10px;
 select {
 background:url(arr.png) no-repeat right #9cceff;
 }
+option {
+	padding:15px 0px;
+	transition:all 0.3s;
+	opacity:0.9;
+	color:white;
+}
 
+option:hover {
+	opacity:1;
+	transition:all 0.5s;
+}
 #dataFieldContainer{
 width:75%;
 height:200px;
@@ -93,15 +134,19 @@ textarea{
 position:relative;
 display:inline-block;
 width:90%;
-height:80%;
-padding-top:1%;
+height:650px;
+padding-top:3%;
 text-align:center;
 line-height:2;
+border:4px dashed #BFBFBF;
+box-shadow:1px 0px 10px #4D4D4D;
+margin-left:15%;
 }
 
 .row12{
 width:50%;
 height:50px;
+display:block;
 }
 .row12 li{
 width:40%;
@@ -122,11 +167,8 @@ display:none;
 display:block;
 }
 
-button {
-width:200px;
-height:50px;
 
-}
+
 .labels,.values {
 width:90px;
 height:35px;
@@ -135,13 +177,17 @@ p{
 color:red;
 display:inline;
 }
+
+
 #resetZoom{
 float:right;
 margin-right:50px;
 }
+
 #myChart {
 max-width:90%;
-width:90%
+width:90%;
+margin-left:5%;
 }
 #pieStats{
 width:95%;
@@ -205,16 +251,90 @@ transition:all 0.3s ease;
 }
 td:hover{
 transition:all 0.5s ease;
-background:#f2f2f2
+background:#f2f2f2;
 }
 .avgTable td{
 border:1px;
 }
 
 
+#confirmBtn {
+	width:20%;
+	padding:15px 0px;
+	background:#EB5E76;
+	box-shadow:1px 0px 1px #E5E5E5;
+	color:#FFFFFF;
+	transition:all 0.3s;
+	border-radius:10px;
+}
+#confirmBtn:hover{
+	background:#6DE86D;
+	transition:all 0.6s;
+	
+}
+.plotControls {
+	display:block;
+	width:100%;
+	margin-left:;
+	background:;
+	border:0px solid green;
+}
+.plotControls td {
+padding:0px 0px;
+color:white;
+font-size:15px;
+border:0px;
+opacity:0.6;
+transition:all 0.3s;
+}
+.plotControls td:hover{
+opacity:1;
+transition:all 0.5s;
+background:transparent;
+box-shadow:0px 2px 3px #E8E8F6;
+}
+
+.plotControls td input,.plotControls td select{
+	display:inine-block;
+	border:0px solid black;
+	text-align:center;
+	background:#E5E5E5;
+	color:#1A1A1A;
+	margin:0px 10px;
+	border-radius:0px;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+td.label {
+color:#4d4d4d;
+border:0px;
+text-align:center;
+}
+td.grades {
+padding:0px 0px 0px 0px;
+width:3.7%;
+display:inline-block;
+text-align:center;
+border:0px solid white;
+margin-right:1%;
+}
+input.curVals{
+border-radius:0px;
+width:100%;
+margin:0px 5px 0px 0px;
+border-width:0px;
+border-right:1px solid #BFBFBF;
+background:white;
+box-shadow:none;
+
+}
 
 
-
+/*
+.plotControls li.label{
+width:5%;
+}
+*/
 #tabStat
 {
 	animation-name:;

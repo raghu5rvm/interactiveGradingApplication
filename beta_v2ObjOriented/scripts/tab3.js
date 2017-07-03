@@ -4,6 +4,7 @@
  * ********************************************************************/
 
 function tab3(){
+	visit=3;
 	if(obj.hasData==0){
 		alert("Can't show statistics without data");
 		}

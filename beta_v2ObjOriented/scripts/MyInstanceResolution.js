@@ -6,7 +6,8 @@ function MyInstance(){
 	 //user inputs......................................................
 	this.Data=[];
 	this.dataFrequency=[];
-	this.maxPossible=100;
+	this.resolution;
+	this.maxPossible=120;
 	this.gradeMode="iitbAbsolute";
 	
 	//variables in all modes............................................
@@ -40,9 +41,6 @@ function MyInstance(){
 	this.gradeValuesFixed=[];
 	this.gradeFrequencyDynamic=[];
 	this.gradeFrequencyStatic=[];
-	this.chartBg=['#7F7F7F'];
-	this.chartType="line";
-	
 	
 	this.pie1=null;
 	this.pie2=null;
@@ -65,43 +63,32 @@ MyInstance.prototype={
 	//confirm input data by user and set variables to new values........
 	
 	 confirmData:function (){
-		 var k=this.setData();
-		 console.log("k is found ");
-		 if(k==0){
-			 alert("Invalid Data for plotting");
-			 return;
-			 }
-		 else if(this.Data.length>0){
+		 console.log("inside confirm data");
+		 this.setData();
+		 if(this.Data.length>0){
 		 	//clear any existing chart..................................
 		 	if(this.myChart!=null){
 						this.myChart.destroy();
 						this.myChart=null;
-						//alert("chart destroyed");
+						alert("chart destroyed");
 						}
 			this.gradeMode=document.getElementById('gradingModel').value;
-			/*this.maxPossible=parseFloat(document.getElementById("maxPossible").value);
-						if(isNaN(this.maxPossible)){
-							alert("Maximum marks should be a number!!!\n Check input");
-							document.getElementById("maxPossible").focus();
+			console.log("grade mode is now " + this.gradeMode);
+			this.resolution=parseFloat(document.getElementById("resolution").value);
+						if(isNaN(this.resolution)){
+							alert("Resolution should be a numbercheck input");
+							document.getElementById("resolution").focus();
 							}
-				*/
+				
 		 //confirm variables of iitb default mode.......................
 			
 			if(this.gradeMode == "iitbDefault"){				
-				
 				console.log("control is in confirm data iitbDefault mode");
-				/********************************************************
-				*--dd[=rValue*0.4]--|--cd--|--cc--|--bc--|--bb--|--ab--|--aa--|rValue|--ap--
-				*
-				********************************************************/
+				//......dd[=rValue*0.4].....|.....cd.....|.....cc.....|......bc.......|......bb......|......ab....|......aa......|rValue|......ap.....
 				this.refValue=parseFloat(document.getElementById('iitbDefaultRefValue').value);
 				console.log("reference value is "+this.refValue);
-				if(isNaN(this.refValue)){
-					alert("Reference Value is not valid!!!");
-					}
-				else if(this.refValue<10){
-					alert("Reference value too small!!!");
-					}
+				this.max=parseFloat(document.getElementById("max").value);
+				this.min=parseFloat(document.getElementById("min").value);
 				this.gradeCount=9;
 				this.gradeLabels=["FF","DD","CD","CC","BC","BB","AB","AA","AP"];
 				this.gradeCredits=[0,4,5,6,7,8,9,10,10];			
@@ -113,22 +100,18 @@ MyInstance.prototype={
 				
 
 				//calculate bounds.......................
-				for(var i=0;i<this.gradeCount-1;i++){
+				for(var i=0;i<this.gradeCount;i++){
 					this.gradeValuesFixed[i]=Math.floor(least+(i*delta));
 					this.gradeValuesMovable[i]=Math.floor(least+(i*delta));
 					}
 				
 				console.log(" grade values from calculation is "+this.gradeValuesFixed);			
-				
 				this.hasData=1;
-			
-			
 				}
-			//end of iitb default mode code.................................
+			//end of iitb default mode code
 				
 			//confirm variables of absolute mode ...........................
 			else if(this.gradeMode=="iitbAbsolute"){
-				
 				console.log("control is in confirm data iitbAbsolute mode");
 				this.gradeCount=9;
 				this.gradeLabels=["FF","DD","CD","CC","BC","BB","AB","AA","AP"];
@@ -136,8 +119,7 @@ MyInstance.prototype={
 				this.gradeValuesFixed=[30,40,50,60,70,80,90,100];
 				this.gradeValuesMovable=[30,40,50,60,70,80,90,100];
 				this.hasData=1;
-
-			
+				
 				}
 			//end of iitb absolute mode code...................................
 
@@ -146,29 +128,20 @@ MyInstance.prototype={
 			else if(this.gradeMode=="custom"){
 					 				
 						console.log("control is in confirm data custom mode");
-						//fetch value of maximum which is upper bound in partitioning grades.(may not be the large value in graph)
-						this.max=parseInt(document.getElementById("max").value);
-						if(isNaN(this.max)){
-							alert("Upper bound is not a number!!!check input");
-							document.getElementById("max").focus();
-							this.hasData=0;
-							return;
-							}
 						//fetch value of minimum which is lower bound in partitioning grades.(may not be the least value in graph)
-						this.min=parseInt(document.getElementById("min").value);
+						this.min=document.getElementById("min").value;
 						if(isNaN(this.min)){	
-							alert("Lower bound is not a number, check input");
+							alert("Min is not a number, check input");
 							document.getElementById("min").focus();
-							this.hasData=0;
-							return;
 							}
-						else if(this.min>=this.max){
-							alert("Lower bound should be less than upper bound");
-							this.hasData=0;
-							return;
+						//fetch value of maximum which is upper bound in partitioning grades.(may not be the large value in graph)
+						this.max=document.getElementById("max").value;
+						if(isNaN(this.max)){
+							alert("Max is not a number, check input");
+							document.getElementById("max").focus();
 							}
 						//fetch number of grades to partition 	
-						this.gradeCount=parseInt(document.getElementById("gradeCount").value);
+						this.gradeCount=document.getElementById("gradeCount").value;
 						if(isNaN(this.gradeCount)){
 							alert("Number of Grades should be a number. Check input");
 							document.getElementById("gradeCount").focus();
@@ -181,103 +154,79 @@ MyInstance.prototype={
 						for(var i=0;i<this.gradeCount;i++){
 								var lId="g"+(parseInt(i)+1)+"L";
 								var vId="g"+(parseInt(i)+1)+"V";
-								console.log("picking label from id : "+lId);
-								this.gradeLabels[i]=document.getElementById(lId).value.trim();
-								if(this.gradeLabels[i]=="" || this.gradeLabels[i]==""){
-									alert("Grade Label "+parseInt(i+1)+" is not valid!!!");
-									this.hasData=0;
-									return;
-									}
-								console.log(	this.gradeLabels[i]   );			
-						
 								console.log("picking credit value from id : "+vId);
-								this.gradeCredits[i]=parseFloat(document.getElementById(vId).value);
-								if(isNaN(this.gradeCredits[i])){
-									alert("Grade credit "+parseInt(i+1)+" is not a number!!!");
-									this.hasData=0;
-									return;
-									}
+								this.gradeCredits[i]=document.getElementById(vId).value;
+								console.log("picking label from id : "+lId);
+								this.gradeLabels[i]=document.getElementById(lId).value;
+								console.log(	this.gradeLabels[i]   );			
 							}	
 						this.gradeCredits.unshift(0);
 						this.gradeLabels.unshift("F");
-						this.gradeCount++;
+						
 						//clear grade bound lists before computing.................................
 						this.gradeValuesMovable=[];
 						this.gradeValuesFixed=[];
-						var delta=( (this.max-this.min) / this.gradeCount+1 );
+						var delta=( (this.max-this.min) / this.gradeCount );
 						for(var i=0;i<this.gradeCount;i++){
 								this.gradeValuesMovable[i]=Math.round(this.min+(delta*(i+1)));
 								this.gradeValuesFixed[i]=Math.round(this.min+(delta*(i+1)));
 							}
 						
 						console.log("grade values are "+this.gradeValuesFixed+" delta is "+ delta);
-						//validation of all inputs is done. Report to user the same......
-						
-						this.hasData=1;
-					
+						//validation of all inputs and report to user the same......
+						//check once for any non validated variables before confirming	
+						if(isNaN(this.min) || isNaN(this.max) || isNaN(this.gradeCount) || isNaN(this.resolution))
+							{
+							console.log("Inputs are not completely validated.");
+							this.hasData=0;
+								}
+							this.hasData=1;
+							
 							
 						console.log("Min is set to "+this.min+"\n Max is "+this.max+"\n Grade count=="+this.gradeCount);
 						console.log("Grade Labels are "+this.gradeLabels+"\nGrade Credits: "+this.gradeCredits);
 				}
-				
 			//end of custom mode code....................................
-				
-			//grade mode custom 2 starts....................................	
 				else if(this.gradeMode=="custom2"){
 					 
 						console.log("control is in confirm data custom2 mode");
 						//fetch number of grades to partition 	
-						this.gradeCount=parseInt(document.getElementById("c2gradeCount").value);
-						if(isNaN(this.gradeCount)){
-							alert("Number of Grades should be a number. Check input"+this.gradeCount);
+						this.gradeCount=document.getElementById("c2gradeCount").value;
+						if(isNaN(this.c2gradeCount)){
+							alert("Number of Grades should be a number. Check input");
 							document.getElementById("c2gradeCount").focus();
-							this.hasData=0;
-							return;
 							}
-						
 						//fetch resolution which would be the minimum unit in x-axis
 						//fetch labels and credits from user........................
 						this.gradeLabels=[];
 						this.gradeCredits=[];
 						this.gradeValuesMovable=[];
 						this.gradeValuesFixed=[];
-						for(var i=0;i<this.gradeCount;i++){
+						for(var i=0;i<this.c2gradeCount;i++){
 								var lId="c2g"+(parseInt(i)+1)+"L";
 								var vId="c2g"+(parseInt(i)+1)+"V";
 								var bId="c2g"+(parseInt(i)+1)+"B";
-							
-								this.gradeLabels[i]=document.getElementById(lId).value;
-								if(this.gradeLabels[i]=="" || this.gradeLabels[i]==""){
-									alert("Grade Label "+parseInt(i+1)+" is not valid!!!");
-									this.hasData=0;
-									return;
-									}
 								console.log("picking from (g/c/b)-id : "+vId);
-								this.gradeCredits[i]=parseInt(document.getElementById(vId).value);
-								if(isNaN(this.gradeCredits[i])){
-									alert("Grade credit "+parseInt(i+1)+" is not a number");
-									this.hasData=0;
-									return;
-									}
-								this.gradeValuesMovable[i]=parseInt(document.getElementById(bId).value);
-								if(isNaN(this.gradeValuesMovable[i])){
-									alert("Grade Bound "+parseInt(i+1)+" is not a number");
-									this.hasData=0;
-									return;
-									}
-								this.gradeValuesFixed[i]=parseInt(document.getElementById(bId).value);
+								this.gradeCredits[i]=document.getElementById(vId).value;
+								this.gradeLabels[i]=document.getElementById(lId).value;
+								this.gradeValuesMovable[i]=document.getElementById(bId).value;
+								this.gradeValuesFixed[i]=document.getElementById(bId).value;
 							}	
 						this.gradeCredits.unshift(0);
 						this.gradeLabels.unshift("F");
-						this.gradeCount++;		
+												
 						//validation of all inputs and report to user the same......
 						//check once for any non validated variables before confirming	
-						
-						this.hasData=1;
-					
-								
+						if( isNaN(this.c2gradeCount) || isNaN(this.resolution))
+							{
+							console.log("Inputs are not completely validated.");
+							this.hasData=0;
+								}
+							this.hasData=1;
+							
+							
 						console.log("Grade Labels are "+this.gradeLabels+"\nGrade Credits: "+this.gradeCredits);
-					}
+				}
 				}
 		
 		},
@@ -287,10 +236,7 @@ MyInstance.prototype={
 	 
 	  setData:function(){
 		inputBox=document.getElementById("dataField");
-		if(inputBox.value==null && inputBox.value==""){
-			return 0;
-			}
-		else if(inputBox.value!=null && inputBox.value!=""){
+		if(inputBox.value!=null && inputBox.value!=""){
 			var tempData;
 			tempData=inputBox.value;
 			tempData=tempData.trim();
@@ -300,7 +246,7 @@ MyInstance.prototype={
 				//tempData[i]=Math.round(tempData[i]);
 				if(isNaN(tempData[i])){				
 					tempData.splice(i,1);
-					return 0;
+					console.log("Invalid input!!!\nEnter only marks which are numbers.Data is of length :");
 					}	
 				}
 				
@@ -317,17 +263,12 @@ MyInstance.prototype={
 					if(this.Data[i]<this.minData)
 						this.minData=this.Data[i];
 				}
-			this.maxPossible=105;
-			if(this.maxData>this.maxPossible){
-				this.maxPossible=Math.ceil(this.maxData*1.1);
-				}
 			console.log("printing average from next")	
 			this.average=total/parseFloat(this.Data.length);
 			console.log("Average = "+this.average)
 			document.getElementById("avgMarks").innerHTML=this.average.toFixed(3);
 			document.getElementById("dataCount").innerHTML=this.Data.length;
 		}
-		return 1;
 	 },
 	 //end of method sed data...........................................
 	 
@@ -347,25 +288,40 @@ MyInstance.prototype={
 
 
 			var labels=[];
+			var bgColors=[];
+			var brdColors=[];
 			//create labels based on resolution and max value on x......	
-			for(var i=0;i<this.maxPossible+1;i++){
-				labels[i]=i;
+			for(var i=0,j=0;i<this.maxPossible;j=j+1,i=i+this.resolution){
+				labels[j]=parseFloat(i).toFixed(2);
+				bgColors[j]='#'+Math.floor(Math.random()*16777215).toString(16);
+				brdColors[j]='#'+Math.floor(Math.random()*16777215).toString(16);
 				}
 			
 			var arrangedData=this.Data.slice();
 			arrangedData.sort();
 			console.log("arranged Data :"+arrangedData+"\n labels are:"+labels);
 			this.dataFrequency=[];
-			for(var i=0;i<this.maxPossible+1;i++)
-				this.dataFrequency[i]=0;
-				
+			for(var i=0,j=0;i<this.maxPossible;i=i+this.resolution,j=j+1)
+				this.dataFrequency[j]=0;
 			console.log("this is freq:"+this.dataFrequency);
 			this.yMax=0;
-			for(var i=0;i<arrangedData.length;i++){
-					this.dataFrequency[Math.round(arrangedData[i])%(this.maxPossible+1)]++;
-					if(this.dataFrequency[Math.round(arrangedData[i])%(this.maxPossible+1)] > this.yMax)
-						this.yMax=this.dataFrequency[Math.round(arrangedData[i])%(this.maxPossible+1)];					
-			}
+			var nearMax=this.resolution/2;
+			nearMax=nearMax.toFixed(2);
+			var i=0,
+				j=0;
+			while(i<arrangedData.length){
+					console.log("labes.length="+labels.length+"i="+i+" j="+j+" arrangedData[i]="+arrangedData[i]+" nearMax="+nearMax+" labels[j]="+labels[j]+"if in "+(parseFloat(arrangedData[i])<(parseFloat(labels[j])+parseFloat(nearMax)))+"sum is "+(labels[j]+nearMax));
+					if(parseFloat(arrangedData[i])<(parseFloat(labels[j])+parseFloat(nearMax))){
+						this.dataFrequency[j]++
+						if(this.dataFrequency[j]>this.yMax)
+							this.yMax=this.dataFrequency[j];
+						i++
+						}
+					else
+						j++;
+						
+				}
+			
 			
 			
 			
@@ -376,48 +332,37 @@ MyInstance.prototype={
 			this.myAnnotationsFixed=[];
 			this.myAnnotationsMovable=[];
 			for(var i=0;i<(this.gradeCount-1);i++) {
-				this.myAnnotationsFixed[i]=this.makeAnnotation(this.gradeValuesFixed[i],this.gradeLabels[i+1],false,"#F15454",5,i);
+				this.myAnnotationsFixed[i]=this.makeAnnotation(this.gradeValuesFixed[i].toFixed(2),this.gradeLabels[i+1],false,"#008000",5,i);
 			}
 			
 			//make annotations which are dynamic and label them...
 			for(var i=0;i<(this.gradeCount-1);i++) {
-				this.myAnnotationsMovable[i]=this.makeAnnotation(this.gradeValuesMovable[i],this.gradeLabels[i+1],true,"#008000",7,i);
+				this.myAnnotationsMovable[i]=this.makeAnnotation(this.gradeValuesMovable[i].toFixed(2),this.gradeLabels[i+1],true,"#F15454",7,i);
 			}
-			
 
 			this.myAnnotations=this.myAnnotationsFixed.concat(this.myAnnotationsMovable);
-			
-			var Lboxes=document.getElementsByClassName("curLabels");
-			var Vboxes=document.getElementsByClassName("curVals");
-			
-			for(var i=0;i<this.gradeLabels.length-1;i++){
-				Lboxes[i].style.display="inline-block";
-				Vboxes[i].style.display="inline-block";
-				Lboxes[i].innerHTML=this.gradeLabels[i]+":";
-				Vboxes[i].value=parseInt(this.gradeValuesMovable[i]);
-				}
-			for(var i=this.gradeLabels.length-1;i<10;i++){
-				Lboxes[i].style.display="none";
-				Vboxes[i].style.display="none";
-				}
 				
-			//this.chartBg=prompt("Enter color");	
+			console.log("Data: "+this.dataFrequency+" \n\nBackgrounds"+bgColors+"\n\nBorders "+brdColors);
+				
 			this.myChart = new Chart(ctx, {
-						type:this.chartType,
+						type:"line",
 						data:  {
 							labels: labels,
 							datasets: [{
 								fill:'origin',
 								label: 	'Frequency.',
 								data:	this.dataFrequency,
-								backgroundColor:this.chartBg,
+								backgroundColor:	'#90EE90',
+								//borderColor:	brdColors,
 								borderWidth:	1,
+								//cubicInterpolationMode:'monotone'
 								lineTension:0.5
 							}]
 						},
 						options: {     responsive:false,
-									   title: {        display: true    },
-									  scales: {       yAxes: [{suggestedMax: this.yMax+5,position: 'left',gridLines: {zeroLineColor: "rgba(0,255,0,1)"}, scaleLabel: {display: true,labelString: 'Frequency'},ticks: { beginAtZero:true, min: 0, max:this.yMax+2 } 		}]    } ,	
+									   title: {        display: true,        text: 'Interactive Grading application'    },
+									  scales: {       xAxes: [{suggestedMax: this.maxData+10,position: 'bottom',gridLines: {zeroLineColor: "rgba(0,255,0,1)"},scaleLabel: {display: true,labelString: 'Marks' }     }],        
+													  yAxes: [{suggestedMax: this.yMax+5,position: 'left',gridLines: {zeroLineColor: "rgba(0,255,0,1)"}, scaleLabel: {display: true,labelString: 'Frequency'},ticks: { beginAtZero:true, min: 0, max:this.yMax+2 } 		}]    } ,	
 								  annotation: {
 												events: ['drag'],
 												annotations:this.myAnnotations
@@ -430,8 +375,8 @@ MyInstance.prototype={
 								enabled: true,
 								mode: 'x',
 								limits: {
-									max: 2,
-									min: 1
+									max: 10,
+									min: 0.25
 								}
 							} 
 						}
@@ -444,49 +389,6 @@ MyInstance.prototype={
 				  /*****************************************************
 				   * 				end of method plot
 				   * ****************************************************/
-					updateGrades:function(e,newVal,index){
-						console.log("in update grades function"+newVal+" index "+index);
-						var val=parseInt(newVal);
-						var i=parseInt(index);
-						if(i==0){
-							if(val>=this.myAnnotationsMovable[1].value){
-									this.myAnnotationsMovable[0].value=this.myAnnotationsMovable[1].value-1;
-									e.value=this.myAnnotationsMovable[i+1].value-1;
-								}
-							else{	
-								this.gradeValuesMovable[parseInt(index)]=parseFloat(newVal);
-								this.myAnnotationsMovable[parseInt(index)].value=parseInt(newVal);
-								}
-							}
-						else if(i>0 && i<this.myAnnotationsMovable.length-1){
-							if(val>this.myAnnotationsMovable[i+1].value){
-								this.myAnnotationsMovable[i]=this.myAnnotationsMovable[i+1]-1;
-								e.value=this.myAnnotationsMovable[i+1]-1;
-								}
-							else if(val<this.myAnnotationsMovable[i-1].value){
-								this.myAnnotationsMovable[i].value=this.myAnnotationsMovable[i-1].value+1
-								e.this.myAnnotationsMovable[i-1].value+1
-								}
-							else{
-								this.gradeValuesMovable[parseInt(index)]=parseFloat(newVal);
-								this.myAnnotationsMovable[parseInt(index)].value=parseInt(newVal);
-								}
-							}
-						else if(i==this.myAnnotationsMovable.length-1){
-							if(val<this.myAnnotationsMovable[i-1].value){
-									this.myAnnotationsMovable[i].value=this.myAnnotationsMovable[i-1].value+1
-									e.this.myAnnotationsMovable[i-1].value+1;
-								}
-							else{
-								this.gradeValuesMovable[parseInt(index)]=parseFloat(newVal);
-								this.myAnnotationsMovable[parseInt(index)].value=parseInt(newVal);
-								}
-							}
-						
-						this.myChart.update()
-						},
-					
-					
 					validateBarMovement:function(bar){
 								console.log(bar);
 								var cPos,cPosRight,cPosLeft;
@@ -494,25 +396,28 @@ MyInstance.prototype={
 								console.log(index);
 								//for begining
 									if(index==0){
-										cPosRight=parseInt(this.gradeValuesMovable[index+1]);
+										cPosRight=parseInt(this.gradeValuesMovable[index+1]).toFixed(2);
 										cPosLeft=-Infinity;
 										}
 									else if(index==(this.gradeValuesMovable.length-1)) {
 										cPosRight=Infinity;
-										cPosLeft=parseInt(this.gradeValuesMovable[index-1]);
+										cPosLeft=parseInt(this.gradeValuesMovable[index-1]).toFixed(2);
 										}
 									else {
-										cPosRight=parseInt(this.gradeValuesMovable[index+1]);
-										cPosLeft=parseInt(this.gradeValuesMovable[index-1]);
+										cPosRight=parseInt(this.gradeValuesMovable[index+1]).toFixed(2);
+										cPosLeft=parseInt(this.gradeValuesMovable[index-1]).toFixed(2);
 										}
 									var cPos=parseInt(this.gradeValuesMovable[index]);
+									console.log("setting curr pos to "+cPos+" where cleft is "+cPosLeft+" and cright is "+cPosRight);	
 									if(cPos>=cPosRight){
-										cPos=cPosRight-1;
-										bar.subject.config.value=cPos;
+										cPos=cPosRight-this.resolution.toFixed(2);
+										bar.subject.config.value=cPos.toString();
+										console.log("cPos=cRight+resolution ==="+(cPosRight)+"-"+(this.resolution)+"===>"+(cPos));				
 										}
 									else if(cPos<=cPosLeft){
-										cPos=cPosLeft+1;	
-										bar.subject.config.value=cPos;
+										cPos=cPosLeft+this.resolution.toFixed(2);	
+										console.log("cPos=cLeft+resolution ==="+cPosLeft+"+"+this.resolution+"===>"+cPos);				
+										bar.subject.config.value=cPos.toString();
 										}
 						
 						},
@@ -549,11 +454,11 @@ MyInstance.prototype={
 									},
 							
 							onDrag: function(e) {
-								console.log("you are dragging this to: "+e, e.subject.config.value);	
 									},
 							
 							onDragEnd: function(e) {
 								console.log(e.type,e, e.subject.config.value);
+								alert("left bar at "+ e.subject.config.value);
 								//recompute statistics and position after drag end
 								//begin validating drag movement........
 								obj.getStats();	
@@ -583,8 +488,8 @@ MyInstance.prototype={
 			console.log("calling get statistics function with grade values fixed = "+ this.gradeValuesFixed);
 			this.gradeValuesMovable=[];
 			for(var i=0;i<this.myAnnotationsMovable.length;i++){
-				this.gradeValuesMovable[i]=this.myAnnotationsMovable[i].value;
-				this.gradeValuesMovable[i]=this.gradeValuesMovable[i];
+				this.gradeValuesMovable[i]=parseFloat(this.myAnnotationsMovable[i].value);
+				this.gradeValuesMovable[i]=this.gradeValuesMovable[i].toFixed(2);
 			}
 			console.log(this.gradeValuesMovable);
 			//Get frequency distibution of students in each partition of grade...............
@@ -611,10 +516,10 @@ MyInstance.prototype={
 				pie2Ctx.canvas.parentNode.style.height = '464px';
 				pie1Ctx.canvas.parentNode.style.width = window.innerWidth*0.45;
 				pie2Ctx.canvas.parentNode.style.width = window.innerWidth*0.45;
-			var myColors=['#7F7F7F','#1E90FF','#D971D9','#DEDE2D','#90EE90','#FFA500','#008000','#A52A2A','#7373A8','#FB46DA','#FF0000']
+
 			var bg=[];
 			for(var i=0;i<this.gradeLabels.length;i++){
-				bg[i]=myColors[i];//'#'+Math.floor(Math.random()*16777215).toString(16);
+				bg[i]='#'+Math.floor(Math.random()*16777215).toString(16);
 				}
 			this.pie1 = new Chart(pie1Ctx, {
 						responsive:false,
@@ -628,7 +533,6 @@ MyInstance.prototype={
 							}]
 						},
 						options: {
-							title: {        display: true  ,text:'Default Stats'  },
 							legend:{
 								position:'left'
 								},
@@ -646,13 +550,12 @@ MyInstance.prototype={
 						data:  {
 							labels: this.gradeLabels,
 							datasets: [{
-								label: 	'New Stats',
+						//		label: 	'Initial result',
 								data:	this.gradeFrequencyDynamic,
 								backgroundColor:bg
 							}]
 						},
 						options: {
-							title: {        display: true  ,text:'New Stats'  },
 							legend:{
 								position:'left'
 								},
