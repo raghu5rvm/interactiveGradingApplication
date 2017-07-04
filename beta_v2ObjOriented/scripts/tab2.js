@@ -40,7 +40,7 @@ function changeChartType(type){
 			obj.chartBg[i]='#'+Math.floor(Math.random()*16777215).toString(16);
 		}
 	else if(type=="line"){
-		obj.chartBg=['#7F7F7F'];
+		obj.chartBg=[];
 		}
 	obj.chartType=type;
 	obj.myChart.destroy();

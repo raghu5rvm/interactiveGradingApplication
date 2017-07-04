@@ -13,7 +13,7 @@ window.onload=function(){
 }
 console.log("after this");
 function hideOther(option){
-	console.log("hiding all other except needed block");
+	console.log("hiding all other except needed block :"+option);
 	var e=document.getElementsByClassName("row14");
 	for(var i=0;i<e.length;i++){
 		if(e[i].id==option)

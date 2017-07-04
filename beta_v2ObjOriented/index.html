@@ -8,12 +8,12 @@
 
 	</head>
 	<body>
-		<div style="position:fixed;top:0;width:100%;left:0;background:#E5E5E5;height:105px;z-index:500;"></div>
+		<div style="position:fixed;top:0;width:100%;left:0;background:#F5F5FA;height:105px;z-index:500;"></div>
 		<header style="position:fixed;top:0;">
 			<ul class="">
-				<li class="" id="tabInput" onclick="tab1()"></li>
-				<li class="" id="tabStat" onclick="tab2()"></li>
-				<li class="" id="tabExport" onclick="tab3()"></li>
+				<li class="" id="tabInput" onclick="tab1()">Input Data</li>
+				<li class="" id="tabStat" onclick="tab2()">Alter Bounds</li>
+				<li class="" id="tabExport" onclick="tab3()">Statistics</li>
 			</ul>
 		</header>
 		<br><br><br><br><br><br><br><br><br>
@@ -46,10 +46,10 @@
 					<ul class="inputClass row13">
 						<li id="gradeModeSelector">
 							<select id="gradingModel">
-								<option value="iitbDefault" onclick="hideOther('iitbDefault');">IIT-B Default</option>
-								<option value="iitbAbsolute" onclick="hideOther('iitbAbsolute');" selected>IIT-B Absolute</option>
-								<option value="custom" onclick="hideOther('custom');">Custom</option>
-								<option value="custom2" onclick="hideOther('custom2');">Custom2</option>
+								<option value="iitbDefault" onclick="hideOther('iitbDefault');" onchange="hideOther('iitbDefault');">IIT-B Default</option>
+								<option value="iitbAbsolute" onclick="hideOther('iitbAbsolute');" onchange="hideOther('iitbDefault');"selected>IIT-B Absolute</option>
+								<option value="custom" onclick="hideOther('custom');" onchange="hideOther('iitbDefault');">Custom</option>
+								<option value="custom2" onclick="hideOther('custom2');" onchange="hideOther('iitbDefault');">Custom2</option>
 							</select>
 						</li>
 					</ul>

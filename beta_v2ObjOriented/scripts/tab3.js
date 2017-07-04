@@ -4,11 +4,11 @@
  * ********************************************************************/
 
 function tab3(){
-	visit=3;
 	if(obj.hasData==0){
 		alert("Can't show statistics without data");
 		}
 	else{
+		visit=3;
 		console.log("inside tab3 function");	
 		document.getElementById("divInput").style.display="none";
 		document.getElementById("divStat").style.display="none";

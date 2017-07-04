@@ -30,7 +30,7 @@ border:0px solid green;
 opacity:0.5;
 transition:all 0.6s;
 box-shadow:0px 2px 2px #8C8CEE;
-
+color:#4d4d4d;
 }
 header ul li:hover {
 opacity:1;
@@ -41,6 +41,8 @@ background-image:url("../img/input.png");
 background-repeat:no-repeat;
 background-position:center center;
 background-size:15%;
+line-height:4;
+padding-left:10px;
 }
 #tabStat {
 background-image:
@@ -48,11 +50,16 @@ url("../img/plot.png");
 background-repeat:no-repeat;
 background-position:center center;
 background-size:15%;
-}#tabExport {
+line-height:4;
+padding-left:10px;
+}
+#tabExport {
 background-image:url("../img/export2.png");
 background-repeat:no-repeat;
 background-position:center center;
 background-size:15%;
+line-height:4;
+padding-left:10px;
 }
 
 
@@ -323,10 +330,10 @@ border-radius:0px;
 width:100%;
 margin:0px 5px 0px 0px;
 border-width:0px;
-border-right:1px solid #BFBFBF;
+border-right:0px solid #BFBFBF;
 background:white;
 box-shadow:none;
-
+text-align:left;
 }
 
 

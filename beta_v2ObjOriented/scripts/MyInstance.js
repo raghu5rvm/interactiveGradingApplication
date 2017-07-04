@@ -266,6 +266,11 @@ MyInstance.prototype={
 									return;
 									}
 								this.gradeValuesFixed[i]=parseInt(document.getElementById(bId).value);
+								if(i>0 && this.gradeValuesFixed[i]<=this.gradeValuesFixed[i-1]){
+									alert("Input grades starting from lowest to highest in ascending order");
+									this.hasData=0;
+									return;
+									}
 							}	
 						this.gradeCredits.unshift(0);
 						this.gradeLabels.unshift("F");
@@ -393,7 +398,7 @@ MyInstance.prototype={
 			for(var i=0;i<this.gradeLabels.length-1;i++){
 				Lboxes[i].style.display="inline-block";
 				Vboxes[i].style.display="inline-block";
-				Lboxes[i].innerHTML=this.gradeLabels[i]+":";
+				Lboxes[i].innerHTML=this.gradeLabels[i+1]+":";
 				Vboxes[i].value=parseInt(this.gradeValuesMovable[i]);
 				}
 			for(var i=this.gradeLabels.length-1;i<10;i++){
@@ -410,7 +415,7 @@ MyInstance.prototype={
 								fill:'origin',
 								label: 	'Frequency.',
 								data:	this.dataFrequency,
-								backgroundColor:this.chartBg,
+								//backgroundColor:this.chartBg,
 								borderWidth:	1,
 								lineTension:0.5
 							}]
@@ -460,12 +465,13 @@ MyInstance.prototype={
 							}
 						else if(i>0 && i<this.myAnnotationsMovable.length-1){
 							if(val>=this.myAnnotationsMovable[i+1].value){
-								this.myAnnotationsMovable[i]=this.myAnnotationsMovable[i+1]-1;
-								e.value=this.myAnnotationsMovable[i+1]-1;
+								this.myAnnotationsMovable[i].value=this.myAnnotationsMovable[i+1].value-1;
+								e.value=this.myAnnotationsMovable[i+1].value-1;
 								}
 							else if(val<=this.myAnnotationsMovable[i-1].value){
-								this.myAnnotationsMovable[i].value=this.myAnnotationsMovable[i-1].value+1
-								this.myAnnotationsMovable[i-1].value+1
+								this.myAnnotationsMovable[i].value=this.myAnnotationsMovable[i-1].value+1;
+								e.value=this.myAnnotationsMovable[i-1].value+1
+								
 								}
 							else{
 								this.gradeValuesMovable[parseInt(index)]=parseFloat(newVal);
@@ -565,7 +571,7 @@ MyInstance.prototype={
 								for(var i=0;i<obj.gradeLabels.length-1;i++){
 									Lboxes[i].style.display="inline-block";
 									Vboxes[i].style.display="inline-block";
-									Lboxes[i].innerHTML=obj.gradeLabels[i]+":";
+									Lboxes[i].innerHTML=obj.gradeLabels[i+1]+":";
 									Vboxes[i].value=parseInt(obj.gradeValuesMovable[i]);
 									}
 								for(var i=obj.gradeLabels.length-1;i<10;i++){
