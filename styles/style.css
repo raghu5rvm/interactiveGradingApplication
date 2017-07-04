@@ -377,8 +377,8 @@ width:5%;
 }
 
 @keyframes fix {
-    from {opacity:0.5;}
-    to {opacity: 0.5;}
+    from {opacity:1;}
+    to {opacity: 1;}
 }
 
 
