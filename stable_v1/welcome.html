@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Welcome</title>
+		<meta lang="en">
+		<link type="text/css" rel="stylesheet" href="">
+		<style>
+			body{
+					background:;
+				}
+			header {
+					opacity:1;
+					position:absolute;
+					width:100%;
+					height:464px;
+					background-color:transparent;
+					padding-top:1.25%;
+					margin-left:-10px;
+				}
+			.headerBg {
+				position:absolute;
+				background-image:url("./img/headerBg.jpg");
+				background-color:transparent;
+				filter:alpha(opacity=10);
+				height:500px;
+				opaicty:0.1;
+				width:100%;
+				display:inline-block;
+				margin:-0.55% 0% 0% -0.55%;
+				}
+			img {
+					width:100%;
+					height:100%;
+				}
+			ul {
+					list-style-type:none;
+				}
+			.left { 
+					float:left;
+				}
+			.right {
+					float:right;
+					margin-right:3%;
+				}
+			.logo{
+					width:;
+					height:90px;
+					border:0px solid black;
+				}
+				.headerBg ul{
+					display:block;
+					background:#E5E5E5;
+					opacity:0.5;
+					height:128px;
+					}
+				#projectLogo{
+					margin:20% 0% 0% 15%;
+					font-family:"Courier New","Times New Roman";
+					font-size:50px;
+					color:#F0F0FA;
+					}
+					#docsBtn{
+						position:absolute;
+						margin:40% 0% 0% 35%;
+						width:15%;
+						height:65px;
+						}
+					#goToAppBtn{
+						position:absolute;
+						margin:40% 0% 0% 51%;
+						width:15%;
+						height:65px;
+						}
+					#docSection{
+						position:absolute;
+						margin-top:50%;
+						width:100%;
+						border:1px solid red;
+					}
+					.docsLeft{
+						border:1px solid yellow;
+						float:left;
+						display:inline-block;
+						width:20%
+						}
+					.docsRight{
+						border:1px solid yellow;
+						float:right;
+						display:inline-block;
+						width:79.5%;
+						}
+					.head{
+						font-size:30px;
+						font-weight:bold;
+						font-family:Times New Roman;
+						color:#4d4d4d;
+						margin:5% 1%;
+						}
+					.subhead{
+						margin:2% 2%;
+						font-size:20px;
+						font-weight:bold;
+						font-family:Times New Roman;
+						color:#4d4d4d;
+						}
+					.content{
+						margin:2% 2%;
+						font-size:14px;
+						font-weight:normal;
+						line-height:2;
+						font-family:Times New Roman;
+						color:#332725;
+						}
+					.subsubhead{
+						margin:2% 5%;
+						font-size:17px;
+						font-weight:bold;
+						font-family:Times New Roman;
+						color:#4d4d4d;
+					}
+					.subcontent{
+						margin:2% 2%;
+						font-size:14px;
+						font-weight:bold;
+						font-family:Times New Roman;
+						color:#4d4d4d;
+						}
+					code pre{
+						background:#F0F0FA;
+						padding:10px;
+						}
+		</style>
+	</head>
+	
+	<body>
+			<div class="headerBg">
+					<ul>
+						<li></li>
+					</ul>
+			</div>
+			<header>
+				<ul id="headerRow1">
+					<li class="logo left">
+						<img src="./img/fosseeLogo.png" />
+					</li>
+					<li class="logo right">
+						<img src="./img/iitBLogo.png"/> 
+					</li>
+				</ul>
+				<ul id="headerRow2">
+					<li id="projectLogo">
+						Interactive Grading Application
+					</li>
+				</ul>
+			</header>
+			<a href="index.html"><button id="goToAppBtn">Plot Now</button></a>
+			<a href="#docSection"><button id="docsBtn">Docs</button></a>
+			<section id="docSection">
+				<div class="docsLeft"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
+				<div class="docsRight">
+					<ul>
+						<li class="head" id="head1">Getting Started</li>
+						<li>
+							
+							<ul>
+								<li class="subhead">ChartJS</li>
+								<li class="content">ChartJS is a JavaScript framework designed to plot graphs of different types with ease. 
+									It inculdes plotting multiple types of data on same chart so that it facilitates comparision.More
+									details about chartjs can be found at <a href="http://www.chartjs.org">ChartJs</a> Official page.								
+								</li>
+							</ul>
+							<ul>
+								<li class="subhead">ChartJsAnnotations</li>
+								<li class="content">This was a plugin designed for chartjs to place annotations on charts made by chartjs. These annotations 
+									are made to be the key componenets in making the graph interactive. The positions of annotations are
+									 found and every time the user drags them (which are denoted as grades in this project) will move to 
+									 new positions if the position is valid("B" grade can not go beyond "A" and get below "C").For 
+									 other details and code samples visit <a href="https://github.com/chartjs/chartjs-plugin-annotation">ChartJs Annotations</a> github page.
+									
+									</li>
+							</ul>
+							<ul>
+								<li class="subhead">ChartJsDraggable</li>
+								<li class="content">ChartJs Draggable is yet another plugin designed to facilitate drag and drop of 
+								some specified elements in plots of chartjs.It also was been used to accomplish the given task of 
+								making an interactive graph plotting.<a href="https://github.com/chartjs/chartjs-plugin-draggable">ChartJs Draggable</a> github page. 
+								</li>
+							</ul>
+							<ul>
+								<li class="subhead">Javascript</li>
+								<li class="content">JavaScript (JS) is a lightweight interpreted or JIT-compiled programming language with first-class 
+								functions. While it is most well-known as the scripting language for Web pages, 
+								many non-browser environments also use it, such as node.js, 
+								Apache CouchDB and Adobe Acrobat. JavaScript is a prototype-based, 
+								multi-paradigm, dynamic language, supporting object-oriented, imperative, 
+								and declarative (e.g. functional programming) styles.
+								 Read more about<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/About_JavaScript">Javascript</a>. </li>
+							</ul>
+							<ul>
+								<li class="subhead"></li>
+								<li></li>
+							</ul>
+							<ul>
+								<li class="subhead"></li>
+								<li></li>
+							</ul>
+
+
+						</li>
+						<li class="head" id="head2">2 Application Interface</li>
+						<li>
+							<ul>
+								<li class="subhead">2.0 Navigation</li>
+								<li class="content">
+									<img src="img/header.png" alt="front-page" title="Data Input">
+									The navigation bar facilitates the user to view different modules of application. The three links in order are<br/>
+									<ul>
+										<li>2.1 Data Input</li>
+										<li>2.2 Alter Plot</li>
+										<li>2.3 Show Stats</li>
+									</ul>
+								</li>
+								<li class="subhead">2.1 Data Input</li>
+								<li class="content">The data input tab has two main divisions. On the left side lies 
+									a data container where the user has to paste the actual data.
+									The data can also be entered manually. The data field calculates data count and 
+									average fo given values and displays it on the top-right side of right side division.	
+								<img src="img/dataInput.png" alt="front-page" title="Data Input" style="width:40%;">
+								<img src="img/dataCount.png" alt="front-page" title="Data Input" style="width:40%;">
+									<li class="subsubhead">2.1.1 Getting data</li>
+									<li class="subcontent">
+										<code>
+<pre>
+	setData:function(){
+			inputBox=document.getElementById("dataField");
+			if(inputBox.value==null &and;&and; inputBox.value==""){
+					return 0;
+				}
+			else if(inputBox.value!=null &and;&and; inputBox.value!=""){
+				var tempData;
+				tempData=inputBox.value;
+				tempData=tempData.trim();
+				tempData=tempData.split('\n');
+				for(var i=0;i&lt;tempData.length;i++){
+						tempData[i]=parseFloat(tempData[i]);
+						if(isNaN(tempData[i])){				
+								tempData.splice(i,1);
+								return 0;
+							}	
+					}
+											
+			console.log("Data is validated"+tempData);
+			this.Data=tempData;
+			var total=0;
+			this.maxData=-Infinity;
+			this.minData=Infinity;
+			//calculating average of whole data provided by user
+			for(var i=0;i&lt;this.Data.length;i++){
+					total+=parseFloat(this.Data[i]);
+					if(this.Data[i]>this.maxData)
+								this.maxData=this.Data[i];
+								if(this.Data[i]&lt;this.minData)
+										this.minData=this.Data[i];
+										}
+			this.maxPossible=105;
+			if(this.maxData>this.maxPossible){
+					this.maxPossible=Math.ceil(this.maxData*1.1);
+				}
+			console.log("printing average from next")	
+			this.average=total/parseFloat(this.Data.length);
+			console.log("Average = "+this.average)
+			document.getElementById("avgMarks").innerHTML=this.average.toFixed(3);
+			document.getElementById("dataCount").innerHTML=this.Data.length;
+		}
+		return 1;
+	 },
+	//end of method sed data...........................................
+</pre>											 
+											
+										</code>		
+									</li>
+								</li>
+								
+								<li class="subhead">2.2 Alter Plot</li>
+								<li class="content">
+								Alter plot tab shows a plot of frequency distribution of given data along with the grades denoted by
+								long vertical bars.The scale is automatically set by the application basing on your data given. The y-axis will
+								have a value of two more than the maximum y value of the plot. Similarly the X-axis will have
+								either 100 or 10% more than the maximum value possible in X. On the top the user has several options to 
+								customize the chart view like <em>Line Chart</em>,<em> Bar Chart</em>,<em> Reset Plot</em>, 
+								<em> Reset Zoom</em> respectively as shown below.
+								<img src="img/chartControls.png" alt="front-page" title="Data Input" >
+								Below the chart options all the grade labels followed by their lower bounds are displayed.
+								These values change dynamically when the user changes the bars on the chart.
+								The bar positions can also be changed by changing the values in this input blocks.
+								New positions of bars which are being moved will be validated automatically and illegal movements are 
+								avoided by default(unless user intentionally wants to do something).<br/>
+								<img src="img/changeData.png" alt="front-page" title="Data Input" style="width:30%;">
+								The "BarChart" and "LineChart" in the chart option menu changes the type of plot being shown in the background.
+								The frequency values of this chart can also be seen by hovering the mouse over a "bar" in case of barChart or "point"
+								in case of lineChart.
+								The view of bar chart and line chart are as follows.
+								<img src="img/barChart(1).png" alt="front-page" title="Data Input" style="height:30%;">
+								<img src="img/lineChart(1).png" alt="front-page" title="Data Input" style="height:30%;">
+								
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</section>
+	</body>
+	
+</html>

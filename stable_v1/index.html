@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Inteactive Gradin...</title>
+		<link type="text/css" rel="stylesheet" href="styles/style.css">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	</head>
+	<body>
+		<div style="position:fixed;top:0;width:100%;left:0;background:#F5F5FA;height:105px;z-index:500;"></div>
+		<header style="position:fixed;top:0;">
+			<ul class="">
+				<li class="" id="tabInput" onclick="tab1()">Input Data</li>
+				<li class="" id="tabStat" onclick="tab2()">Alter Bounds</li>
+				<li class="" id="tabExport" onclick="tab3()">Statistics</li>
+			</ul>
+		</header>
+		<br><br><br><br><br><br><br><br><br>
+		<section>
+			<div id="divInput">
+					<div id="leftInput" style="float:left;">
+						<fieldset>
+							<legend>Data</legend>
+							<ul class="inputClass row11">
+								<li id="dataFieldContainer">
+									<textarea id="dataField" placeholder="Place Your Data here" onkeyup="obj.setData()" onchange="obj.setData()" required></textarea>
+								</li>
+							</ul>
+						</fieldset>
+						</div>
+					<div id="rightInput" style="float:right;margin-left:37%;">
+					<center>
+						<fieldset>
+							<legend>Parameters</legend>
+						
+					<ul class="inputClass row12">
+						<li>
+							Data Count: <p id="dataCount"></p>
+						</li>
+						<li>
+							Average Marks: <p id="avgMarks"></p>
+						</li>
+					</ul>
+					<hr style="width:95%;box-shadow:0.1px 0px 0.2px #0000FF;background:#E5E5E5;border:0.1px solid #E5E5E5;">
+					<ul class="inputClass row13">
+						<li id="gradeModeSelector">
+							<select id="gradingModel">
+								<option value="iitbDefault" onclick="hideOther('iitbDefault');" onchange="hideOther('iitbDefault');">IIT-B Default</option>
+								<option value="iitbAbsolute" onclick="hideOther('iitbAbsolute');" onchange="hideOther('iitbDefault');"selected>IIT-B Absolute</option>
+								<option value="custom" onclick="hideOther('custom');" onchange="hideOther('iitbDefault');">Custom</option>
+								<option value="custom2" onclick="hideOther('custom2');" onchange="hideOther('iitbDefault');">Custom2</option>
+							</select>
+						</li>
+					</ul>
+					<hr style="width:95%;box-shadow:0.1px 0px 0.2px #0000FF;background:#E5E5E5;border:0.1px solid #E5E5E5;">
+					<ul class="inputClass row14" id="iitbDefault">
+						<li id="iitbDefaultRow1">Upper Bound of "A" Grade:
+							<input type="number" id="iitbDefaultRefValue" placeholder="Enter A Grade Boundary" max="" min="0" step="1">
+						</li>
+					</ul>
+					<ul class="inputClass row14" id="iitbAbsolute">
+						
+					</ul>
+					<ul class="inputClass row14" id="custom">
+						<ul id="customRow11">
+							<li>Lower Bound:<input type="number" id="min"  placeholder="Enter minimum" min="0"  required></li>
+							<li>Upper Bound:<input type="number" id="max"  placeholder="Enter maximum" min="0"  required></li>
+							<br/>
+							<li>Number of Grades:<input type="number" id="gradeCount"  placeholder="Enter Grade Count" value="5" min="2" max="10" onchange="showCreditEntryBox(this.value,1)" onkeyup="showCreditEntryBox(this.value,1)" required></li>
+						</ul>
+						<hr style="width:95%;box-shadow:0.1px 0px 0.2px #0000FF;background:#E5E5E5;border:0.1px solid #E5E5E5;">
+
+						<ul id="customRow12">Grade Labels:
+							<input class="labels" type="text" id="g1L" value=""  placeholder="L1">
+							<input class="labels" type="text" id="g2L" value=""  placeholder="L2">
+							<input class="labels" type="text" id="g3L" value=""  placeholder="L3">
+							<input class="labels" type="text" id="g4L" value=""  placeholder="L4">
+							<input class="labels" type="text" id="g5L" value=""  placeholder="L5">
+							<input class="labels" type="text" id="g6L" value=""  placeholder="L6">
+							<input class="labels" type="text" id="g7L" value=""  placeholder="L7">
+							<input class="labels" type="text" id="g8L" value=""  placeholder="L8">
+							<input class="labels" type="text" id="g9L" value=""  placeholder="L9">
+							<input class="labels" type="text" id="g10L" value=""  placeholder="L10">
+						</ul>
+						<hr style="width:95%;box-shadow:0.1px 0px 0.2px #0000FF;background:#E5E5E5;border:0.1px solid #E5E5E5;">
+
+						<ul id="customRow13">Grade Credits:
+							<input class="values" type="text" id="g1V" value=""  placeholder="G1">
+							<input class="values" type="text" id="g2V" value="" placeholder="G2">
+							<input class="values" type="text" id="g3V" value="" placeholder="G3">
+							<input class="values" type="text" id="g4V" value="" placeholder="G4">
+							<input class="values" type="text" id="g5V" value="" placeholder="G5">
+							<input class="values" type="text" id="g6V" value="" placeholder="G6">
+							<input class="values" type="text" id="g7V" value="" placeholder="G7">
+							<input class="values" type="text" id="g8V" value="" placeholder="G8">
+							<input class="values" type="text" id="g9V" value="" placeholder="G9">
+							<input class="values" type="text" id="g10V" value="" placeholder="G10">
+						</ul>
+					
+					</ul>
+					<ul class="inputClass row14" id="custom2">
+						<ul id="customRow21">
+							<br/>
+							<li>GradeCount:<input type="number" id="c2gradeCount"  placeholder="Enter Grade Count" min="2" max="10" onchange="showCreditEntryBox(this.value,2)" onkeyup="showCreditEntryBox(this.value,2)" required></li>
+						</ul>
+						<hr style="width:95%;box-shadow:0.1px 0px 0.2px #0000FF;background:#E5E5E5;border:0.1px solid #E5E5E5;">
+
+						<ul id="customRow22">Labels:
+							<input class="labels" type="text" id="c2g1L" value="" placeholder="L1">
+							<input class="labels" type="text" id="c2g2L" value="" placeholder="L2">
+							<input class="labels" type="text" id="c2g3L" value="" placeholder="L3">
+							<input class="labels" type="text" id="c2g4L" value="" placeholder="L4">
+							<input class="labels" type="text" id="c2g5L" value="" placeholder="L5">
+							<input class="labels" type="text" id="c2g6L" value="" placeholder="L6">
+							<input class="labels" type="text" id="c2g7L" value="" placeholder="L7">
+							<input class="labels" type="text" id="c2g8L" value="" placeholder="L8">
+							<input class="labels" type="text" id="c2g9L" value="" placeholder="L9">
+							<input class="labels" type="text" id="c2g10L" value="" placeholder="L10">
+						</ul>
+						<hr style="width:95%;box-shadow:0.1px 0px 0.2px #0000FF;background:#E5E5E5;border:0.1px solid #E5E5E5;">
+						<ul id="customRow23">Grades:
+							<input class="values" type="text" id="c2g1V" value=""  placeholder="G1">
+							<input class="values" type="text" id="c2g2V" value=""  placeholder="G2">
+							<input class="values" type="text" id="c2g3V" value=""  placeholder="G3">
+							<input class="values" type="text" id="c2g4V" value=""  placeholder="G4">
+							<input class="values" type="text" id="c2g5V" value=""  placeholder="G5">
+							<input class="values" type="text" id="c2g6V" value=""  placeholder="G6">
+							<input class="values" type="text" id="c2g7V" value=""  placeholder="G7">
+							<input class="values" type="text" id="c2g8V" value=""  placeholder="G8">
+							<input class="values" type="text" id="c2g9V" value=""  placeholder="G9">
+							<input class="values" type="text" id="c2g10V" value=""  placeholder="G10">
+						</ul>
+						<hr style="width:95%;box-shadow:0.1px 0px 0.2px #0000FF;background:#E5E5E5;border:0.1px solid #E5E5E5;">
+
+						<ul id="customRow24">Grade Bounds:
+							<input class="values" type="text" id="c2g1B" value=""  placeholder="B1">
+							<input class="values" type="text" id="c2g2B" value=""  placeholder="B2">
+							<input class="values" type="text" id="c2g3B" value=""  placeholder="B3">
+							<input class="values" type="text" id="c2g4B" value=""  placeholder="B4">
+							<input class="values" type="text" id="c2g5B" value=""  placeholder="B5">
+							<input class="values" type="text" id="c2g6B" value=""  placeholder="B6">
+							<input class="values" type="text" id="c2g7B" value=""  placeholder="B7">
+							<input class="values" type="text" id="c2g8B" value=""  placeholder="B8">
+							<input class="values" type="text" id="c2g9B" value=""  placeholder="B9">
+							<input class="values" type="text" id="c2g10B" value=""  placeholder="B10">
+						</ul>
+						
+					</ul>
+
+				</ul>
+				</center>
+				
+				</div>
+				</fieldset>				
+				<br/><br/><br/><br/><br/><br/>			
+			</div>
+			<div id="divStat">
+					<table style="width:95%;border:0px solid green;margin-left:2.5%;">
+						<tr class="plotControls">
+							<td class="label"></td>
+							<td class="label" title="Line Chart"><option value="line" title="Line Chart" style="background:url('./img/lineChart.png');background-repeat:no-repeat;background-position:center center;background-size:50%;" onclick="changeChartType('line')"></option></td>
+							<td class="dropDown" title="Bar Chart"><option title="Bar chart" style="background:url('./img/barChart.png');background-repeat:no-repeat;background-position:center center;background-size:50%;" value="" onclick="changeChartType('bar')"></option></td>
+							<td title="Reset Chart"><input type="button" onclick="obj.myChart.destroy();obj.confirmData();obj.plotData();" style="float:right;background:url('./img/resetChart.png');background-repeat:no-repeat;background-position:center center;background-size:50%;" value=""></td>
+							<td class="label"></td>
+							<td class="label"></td>
+							<td class="label"></td>
+							<td class="label"></td>
+							<td class="label"></td>
+							<td title="Zoom(100%)"><input type="button" style="float:right;background:url('./img/resetZoom.png');background-repeat:no-repeat;background-position:center center;background-size:50%;" onclick="obj.myChart.resetZoom()"></td>
+						</tr>
+						<tr><td class="label"></td></tr>
+						<tr>
+							<td class="label"></td>
+							
+							<td class="grades"><p class="curLabels"></p></td>
+							<td class="grades"><input type="number" class="curVals" value="" onchange="obj.updateGrades(this,this.value,0)"></td>
+							<td class="grades"><p class="curLabels"></p></td>
+							<td class="grades"><input type="number" class="curVals" value="" onchange="obj.updateGrades(this,this.value,1)"></td>
+							<td class="grades"><p class="curLabels"></p></td>
+							<td class="grades"><input type="number" class="curVals" value="" onchange="obj.updateGrades(this,this.value,2)"></td>
+							<td class="grades"><p class="curLabels"></p></td>
+							<td class="grades"><input type="number" class="curVals" value="" onchange="obj.updateGrades(this,this.value,3)"></td>
+							<td class="grades"><p class="curLabels"></p></td>
+							<td class="grades"><input type="number" class="curVals" value="" onchange="obj.updateGrades(this,this.value,4)"></td>
+							<td class="grades"><p class="curLabels"></p></td>
+							<td class="grades"><input type="number" class="curVals" value="" onchange="obj.updateGrades(this,this.value,5)"></td>
+							<td class="grades"><p class="curLabels"></p></td>
+							<td class="grades"><input type="number" class="curVals" value="" onchange="obj.updateGrades(this,this.value,6)"></td>
+							<td class="grades"><p class="curLabels"></p></td>
+							<td class="grades"><input type="number" class="curVals" value="" onchange="obj.updateGrades(this,this.value,7)"></td>
+							<td class="grades"><p class="curLabels"></p></td>
+							<td class="grades"><input type="number" class="curVals" value="" onchange="obj.updateGrades(this,this.value,8)"></td>
+							<td class="grades"><p class="curLabels"></p></td>
+							<td class="grades"><input type="number" class="curVals" value="" onchange="obj.updateGrades(this,this.value,9)"></td>
+						</tr>
+					</table>
+				<!--
+					<ul class="plotControls">
+						<li class="label"><Chart Type </li>
+						<li><select id="">
+							</select>
+						</li>
+						<li class="label">some</li>
+						<li>
+							<select id="">
+								<option value="">something</option>
+							</select>
+						</li>
+						<li class="label">Chart Background</li>
+						<li>
+							<input type="color" id="chartBg" onchange="(function(){obj.chartBg[0]=document.getElementById('chartBg').value;obj.myChart.update();})()">
+						</li>
+						<li style="float:right;margin-right:3%;">
+							<input type="button" onclick="obj.myChart.resetZoom()" value="Reset">
+						</li>
+						
+					</ul>
+					-->
+					<table id="gradeDisplay">
+						
+					</table>
+					<canvas id="myChart" width="100%" height="100%"></canvas>
+			</div>
+			
+			
+			<div id="divExport">
+				<center>
+					<table>
+						<tr id="row0">
+							<th>Grade</th>
+							<th>Credits</th>
+							<th>Lower bound</th>
+							<th>Upper bound</th>
+							<th>Freq</th>
+							<th>New Lower bound</th>
+							<th>New Upper bound</th>
+							<th>New Frequency</th>
+						</tr>
+						<tr class="statsTableRows" id="row1">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="statsTableRows" id="row2">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="statsTableRows" id="row3">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="statsTableRows" id="row4">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="statsTableRows" id="row5">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="statsTableRows" id="row6">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="statsTableRows" id="row7">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="statsTableRows" id="row8">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="statsTableRows" id="row9">
+						
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="statsTableRows" id="row10">
+							
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+
+
+					</table>
+					
+					<table>
+						<tr class="avgTable">
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+					<br/>
+					<br/>
+					<hr>
+					<br/>
+					<br/>
+					<section id="pieStats">
+						<canvas id="pie1"></canvas>
+						<canvas id="pie2"></canvas>
+					</section>
+					
+				</center>
+			</div>
+		</section>
+		<br/>
+		<br/>
+		<br/><br/>
+		<br/>
+		<br/><br/>
+		<br/>
+		<br/>
+		<footer>
+			
+		</footer>
+		<script type="text/javascript" src="scripts/Chart.js"></script>
+		<script type="text/javascript" src="scripts/chartjs-plugin-annotation.js"></script>
+		<script type="text/javascript" src="scripts/chartjs-plugin-draggable.js"></script>
+		<script type="text/javascript"  src="scripts/chartjs-plugin-zoom.js"></script>		
+		<script type="text/javascript"  src="scripts/MyInstance.js"></script>		
+		<script type="text/javascript" src="scripts/script.js"></script>
+		<script type="text/javascript" src="scripts/tab1.js"></script>
+		<script type="text/javascript" src="scripts/tab2.js"></script>
+		<script type="text/javascript" src="scripts/tab3.js"></script>
+	
+	</body>
+</html>
