@@ -47,9 +47,9 @@
 						<li id="gradeModeSelector">
 							<select id="gradingModel">
 								<option value="iitbDefault" onclick="hideOther('iitbDefault');" onchange="hideOther('iitbDefault');">IIT-B Default</option>
-								<option value="iitbAbsolute" onclick="hideOther('iitbAbsolute');" onchange="hideOther('iitbAbsolute');"selected>IIT-B Absolute</option>
-								<option value="custom" onclick="hideOther('custom');" onchange="hideOther('custom');">Equi-Partition</option>
-								<option value="custom2" onclick="hideOther('custom2');" onchange="hideOther('custom2');">Custom</option>
+								<option value="iitbAbsolute" onclick="hideOther('iitbAbsolute');" onchange="hideOther('iitbDefault');"selected>IIT-B Absolute</option>
+								<option value="custom" onclick="hideOther('custom');" onchange="hideOther('iitbDefault');">Custom</option>
+								<option value="custom2" onclick="hideOther('custom2');" onchange="hideOther('iitbDefault');">Custom2</option>
 							</select>
 						</li>
 					</ul>
@@ -106,7 +106,7 @@
 						</ul>
 						<hr style="width:95%;box-shadow:0.1px 0px 0.2px #0000FF;background:#E5E5E5;border:0.1px solid #E5E5E5;">
 
-						<ul id="customRow22">Grade Labels:
+						<ul id="customRow22">Labels:
 							<input class="labels" type="text" id="c2g1L" value="" placeholder="L1">
 							<input class="labels" type="text" id="c2g2L" value="" placeholder="L2">
 							<input class="labels" type="text" id="c2g3L" value="" placeholder="L3">
@@ -119,7 +119,7 @@
 							<input class="labels" type="text" id="c2g10L" value="" placeholder="L10">
 						</ul>
 						<hr style="width:95%;box-shadow:0.1px 0px 0.2px #0000FF;background:#E5E5E5;border:0.1px solid #E5E5E5;">
-						<ul id="customRow23">Grade Credits:
+						<ul id="customRow23">Grades:
 							<input class="values" type="text" id="c2g1V" value=""  placeholder="G1">
 							<input class="values" type="text" id="c2g2V" value=""  placeholder="G2">
 							<input class="values" type="text" id="c2g3V" value=""  placeholder="G3">

@@ -40,7 +40,7 @@ function MyInstance(){
 	this.gradeValuesFixed=[];
 	this.gradeFrequencyDynamic=[];
 	this.gradeFrequencyStatic=[];
-	this.chartBg=['#7F7F7F'];
+	this.chartBg='#7F7F7F';
 	this.chartType="line";
 	
 	
@@ -415,7 +415,7 @@ MyInstance.prototype={
 								fill:'origin',
 								label: 	'Frequency.',
 								data:	this.dataFrequency,
-								//backgroundColor:this.chartBg,
+								backgroundColor:this.chartBg,
 								borderWidth:	1,
 								lineTension:0.5
 							}]

@@ -43,7 +43,7 @@
 					margin-right:3%;
 				}
 			.logo{
-					width:15%;
+					width:;
 					height:90px;
 					border:0px solid black;
 				}
@@ -54,10 +54,41 @@
 					height:128px;
 					}
 				#projectLogo{
-					width:40%;
-					height:10%;
-					margin:40% 0% 0% 25%;
+					margin:20% 0% 0% 15%;
+					font-family:"Courier New","Times New Roman";
+					font-size:50px;
+					color:#F0F0FA;
 					}
+					#docsBtn{
+						position:absolute;
+						margin:40% 0% 0% 35%;
+						width:15%;
+						height:65px;
+						}
+					#goToAppBtn{
+						position:absolute;
+						margin:40% 0% 0% 51%;
+						width:15%;
+						height:65px;
+						}
+					#docSection{
+						position:absolute;
+						margin-top:50%;
+						width:100%;
+						border:1px solid red;
+					}
+					.docsLeft{
+						border:1px solid yellow;
+						float:left;
+						display:inline-block;
+						width:20%
+						}
+					.docsRight{
+						border:1px solid yellow;
+						float:right;
+						display:inline-block;
+						width:79.5%;
+						}
 		</style>
 	</head>
 	
@@ -78,10 +109,16 @@
 				</ul>
 				<ul id="headerRow2">
 					<li id="projectLogo">
-						<img src="./img/igaLogo.png"/>
+						Interactive Grading Application
 					</li>
 				</ul>
 			</header>
+			<button id="docsBtn"><a href="#docSection">Docs</a></button>
+			<button id="goToAppBtn">Plot Now</button>
+			<section id="docSection">
+				<div class="docsLeft"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
+				<div class="docsRight">akjdfjladkfjljadl</div>
+			</section>
 	</body>
 	
 </html>

@@ -30,19 +30,24 @@ function tab2(){
 }
 }
 function changeChartBg(color){
-	obj.chartBg[0]=color;
-	obj.myChart.update();
+	obj.chartBg=null;
+	obj.chartBg=color;
+	obj.plotData();
 	}
 function changeChartType(type){
-	if(type=="bar"){
+	obj.chartType=type;
+	//alert(obj.chartType);
+	obj.myChart.destroy();
+		if(type=="bar"){	
 		obj.chartBg=[];
 		for(var i=0;i<obj.dataFrequency.length;i++)
 			obj.chartBg[i]='#'+Math.floor(Math.random()*16777215).toString(16);
+
+		obj.plotData();
 		}
+	
 	else if(type=="line"){
-		obj.chartBg=[];
+		changeChartBg("#BFBFBF");
 		}
-	obj.chartType=type;
-	obj.myChart.destroy();
-	obj.plotData();
-	}
+	
+}
