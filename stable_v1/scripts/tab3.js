@@ -25,7 +25,12 @@ function tab3(){
 			obj.pie2=null;				
 			obj.showPieStats();
 			}
-		document.getElementById("tabExport").style.animation="1s fix linear infinite";
+		document.getElementById("tabInput").style.opacity="0.4";
+		document.getElementById("tabInput").style.color="#4d4d4d";
+		document.getElementById("tabStat").style.opacity="0.4";
+		document.getElementById("tabStat").style.color="#4d4d4d";
+		document.getElementById("tabExport").style.opacity="1";
+		document.getElementById("tabExport").style.color="#B93E3E";
 	}
 }
 

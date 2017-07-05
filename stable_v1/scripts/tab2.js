@@ -25,8 +25,13 @@ function tab2(){
 		else{
 			obj.myChart.update();
 			}
-		document.getElementById("tabStat").style.animation="1s fix linear infinite";
-		document.getElementById("tabExport").style.animation="1s flash linear infinite";
+		document.getElementById("tabInput").style.opacity="0.4";
+		document.getElementById("tabInput").style.color="#4d4d4d";
+		document.getElementById("tabStat").style.opacity="1";
+		document.getElementById("tabStat").style.color="#B93E3E";
+		document.getElementById("tabExport").style.opacity="0.4";
+		document.getElementById("tabExport").style.color="#4d4d4d";
+
 }
 }
 function changeChartBg(color){
@@ -41,12 +46,17 @@ function changeChartType(type){
 		if(type=="bar"){	
 		obj.chartBg=[];
 		for(var i=0;i<obj.dataFrequency.length;i++)
-			obj.chartBg[i]='#'+Math.floor(Math.random()*16777215).toString(16);
+			obj.chartBg[i]="#BFBFBF";
 
 		obj.plotData();
+		document.getElementById("lineChartBtn").style.opacity="0.5";
+		document.getElementById("barChartBtn").style.opacity="1";
+
 		}
 	
 	else if(type=="line"){
+		document.getElementById("lineChartBtn").style.opacity="1";
+		document.getElementById("barChartBtn").style.opacity="0.5";
 		changeChartBg("#BFBFBF");
 		}
 	

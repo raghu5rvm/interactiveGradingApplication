@@ -97,10 +97,14 @@ MyInstance.prototype={
 				this.refValue=parseFloat(document.getElementById('iitbDefaultRefValue').value);
 				console.log("reference value is "+this.refValue);
 				if(isNaN(this.refValue)){
-					alert("Reference Value is not valid!!!");
+					alert("Invalid or missing input!!! \nCheck value of upper bound of 'AA' grade!!!");
+					this.hasData=0;
+					return;
 					}
 				else if(this.refValue<10){
 					alert("Reference value too small!!!");
+					this.hasData=0;
+					return;
 					}
 				this.gradeCount=9;
 				this.gradeLabels=["FF","DD","CD","CC","BC","BB","AB","AA","AP"];
@@ -632,7 +636,7 @@ MyInstance.prototype={
 				pie2Ctx.canvas.parentNode.style.height = '464px';
 				pie1Ctx.canvas.parentNode.style.width = window.innerWidth*0.45;
 				pie2Ctx.canvas.parentNode.style.width = window.innerWidth*0.45;
-			var myColors=['#7F7F7F','#1E90FF','#D971D9','#DEDE2D','#90EE90','#FFA500','#008000','#A52A2A','#7373A8','#FB46DA','#FF0000']
+			var myColors=['#A52A2A','#7373A8','#FB46DA','#D971D9','#DEDE2D','#FF0000','#90EE90','#FFA500','#7F7F7F','#1E90FF','#008000'];
 			var bg=[];
 			for(var i=0;i<this.gradeLabels.length;i++){
 				bg[i]=myColors[i];//'#'+Math.floor(Math.random()*16777215).toString(16);
@@ -703,7 +707,11 @@ MyInstance.prototype={
 				var tableRow=tableRows[i].children;
 				console.log(tableRow);
 				console.log("this row is having "+tableRow.length+" no of td");
-				
+				tableRow[4].style.background = tableRow[0].style.background = tableRow[1].style.background = tableRow[2].style.background = tableRow[3].style.background = "#E5E5E5";
+				tableRow[4].style.color = tableRow[0].style.color = tableRow[1].style.color = tableRow[2].style.color = tableRow[3].style.color = "#D45050";
+
+				tableRow[5].style.color = tableRow[6].style.color = tableRow[7].style.color = "#008000";
+
 				tableRow[0].innerHTML=(this.gradeLabels[i]);
 				tableRow[1].innerHTML=(this.gradeCredits[i]);
 				tableRow[2].innerHTML=(this.gradeValuesFixed[i]);
@@ -720,8 +728,10 @@ MyInstance.prototype={
 			var avgTable=document.getElementsByClassName("avgTable")[0].children;
 				avgTable[3].innerHTML="Average GPA";
 				avgTable[4].innerHTML=this.getAverageGPA(this.gradeFrequencyStatic);
+				avgTable[4].style.color="red";
 				avgTable[6].innerHTML="New Average GPA";
 				avgTable[7].innerHTML=this.getAverageGPA(this.gradeFrequencyDynamic);
+				avgTable[7].style.color="green";
 			
 			this.gradeValuesFixed.shift();
 			this.gradeValuesFixed.pop();;
@@ -744,6 +754,7 @@ MyInstance.prototype={
 				var maxLimit=positions[i];
 				var sum=0;
 				for(var j=index;j<dataSet.length;j++){
+				  console.log("datsa os: "+dataSet[j]);
 				  if(dataSet[j]<maxLimit  && dataSet[j]>=min){
 					sum++;
 					cumSum++;
