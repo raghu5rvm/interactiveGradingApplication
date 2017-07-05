@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Welcome</title>
+		<title>Interactive Grading Application</title>
 		<meta lang="en">
 		<link type="text/css" rel="stylesheet" href="">
 		<style>
@@ -64,27 +64,42 @@
 						margin:40% 0% 0% 35%;
 						width:15%;
 						height:65px;
+						background:#84D184;
+						transition:all 0.3s;
+						border-radius:10px;
+						font-size:15px;
+						color:#4d4d4d;
 						}
 					#goToAppBtn{
 						position:absolute;
 						margin:40% 0% 0% 51%;
 						width:15%;
 						height:65px;
+						background:#FF8FA3;
+						transition:all 0.3s;
+						border-radius:10px;
+						font-size:15px;
+						color:#4d4d4d;
 						}
+					#docsBtn:hover,#goToAppBtn:hover{
+						background:#B0B0F1;
+						transition:all 0.5s;
+						color:white;
+						}	
 					#docSection{
 						position:absolute;
 						margin-top:50%;
 						width:100%;
-						border:1px solid red;
+						border-top:2px solid #BFBFBF;
 					}
 					.docsLeft{
-						border:1px solid yellow;
+						border:0px solid yellow;
 						float:left;
 						display:inline-block;
 						width:20%
 						}
 					.docsRight{
-						border:1px solid yellow;
+						border:2px solid #E5E5E5;
 						float:right;
 						display:inline-block;
 						width:79.5%;
@@ -119,17 +134,12 @@
 						color:#4d4d4d;
 					}
 					.subcontent{
-						margin:2% 2%;
+						margin:2% 10%;
 						font-size:14px;
-						font-weight:bold;
 						font-family:Times New Roman;
 						color:#4d4d4d;
 						}
-					code pre{
-						background:#F0F0FA;
-						padding:10px;
-						}
-		</style>
+				</style>
 	</head>
 	
 	<body>
@@ -220,67 +230,48 @@
 										<li>2.3 Show Stats</li>
 									</ul>
 								</li>
+								<br/>
 								<li class="subhead">2.1 Data Input</li>
 								<li class="content">The data input tab has two main divisions. On the left side lies 
 									a data container where the user has to paste the actual data.
 									The data can also be entered manually. The data field calculates data count and 
 									average fo given values and displays it on the top-right side of right side division.	
-								<img src="img/dataInput.png" alt="front-page" title="Data Input" style="width:40%;">
-								<img src="img/dataCount.png" alt="front-page" title="Data Input" style="width:40%;">
-									<li class="subsubhead">2.1.1 Getting data</li>
-									<li class="subcontent">
-										<code>
-<pre>
-	setData:function(){
-			inputBox=document.getElementById("dataField");
-			if(inputBox.value==null &and;&and; inputBox.value==""){
-					return 0;
-				}
-			else if(inputBox.value!=null &and;&and; inputBox.value!=""){
-				var tempData;
-				tempData=inputBox.value;
-				tempData=tempData.trim();
-				tempData=tempData.split('\n');
-				for(var i=0;i&lt;tempData.length;i++){
-						tempData[i]=parseFloat(tempData[i]);
-						if(isNaN(tempData[i])){				
-								tempData.splice(i,1);
-								return 0;
-							}	
-					}
-											
-			console.log("Data is validated"+tempData);
-			this.Data=tempData;
-			var total=0;
-			this.maxData=-Infinity;
-			this.minData=Infinity;
-			//calculating average of whole data provided by user
-			for(var i=0;i&lt;this.Data.length;i++){
-					total+=parseFloat(this.Data[i]);
-					if(this.Data[i]>this.maxData)
-								this.maxData=this.Data[i];
-								if(this.Data[i]&lt;this.minData)
-										this.minData=this.Data[i];
-										}
-			this.maxPossible=105;
-			if(this.maxData>this.maxPossible){
-					this.maxPossible=Math.ceil(this.maxData*1.1);
-				}
-			console.log("printing average from next")	
-			this.average=total/parseFloat(this.Data.length);
-			console.log("Average = "+this.average)
-			document.getElementById("avgMarks").innerHTML=this.average.toFixed(3);
-			document.getElementById("dataCount").innerHTML=this.Data.length;
-		}
-		return 1;
-	 },
-	//end of method sed data...........................................
-</pre>											 
-											
-										</code>		
+								<img src="img/dataInput.png" alt="front-page" title="Data Input" style="width:40%;display:block;">
+								<img src="img/dataCount.png" alt="front-page" title="Data Input" style="width:40%;display:block;"><br/>
+								The parameters section is where you can select different grading schemes. The application includes
+								two schemes used by iitBombay namely
+								<ul>
+									<li>IITB Default</li>
+									<li>IITB Absolute</li>
+									<li>Equi Partition</li>
+									<li>Custom</li>
+								</ul>
+								<img src="img/parameters.png" alt="Paramaters" title="parameters" style="margin-left:;display:inline-block;width:70%;">
+								<img src="img/algos.png" alt="Grading Schemes" title="Grading Schemes" style="display:inline-block;width:15%;">
+								<ul>
+									<li class="subsubhead">2.1.1 IITB Default</li>
+									<li class="subcontent">IITB default scheme follows a grading mode in which the minimum pass mark will be 40% of "AP" grade.
+									 Between these "AP" and "pass" there will be seven other grades like "AA","AB","BB","CB","CC","DC","DD". The user has 
+									 to provide the upper bound of "AA"(same as lower bound of "AP"). The application will plot the grades accordingly. </li>
+									<li class="subsubhead">2.1.2 IITB Absolute</li>
+									<li class="subcontent">IITB Absolute is a scheme in which all the grade bounds are fixed before hand.
+										Just select the mode and click on second tab to view plot and make any changes there.
 									</li>
+									<li class="subsubhead">2.1.3 Equipartition</li>
+									<li class="subcontent">In equi partition mode the user has to provide data, number of grades, credit values
+									of each grade, a lower bound and an upper bound. The grades will be set such that the upper bound and lower bound
+									is made in the number of equal partitions same as the grade count specified by the user.									
+									</li>
+									<li class="subsubhead">2.1.4 Custom</li>
+									<li class="subcontent">Custom is a very direct mode of grading. The user has to provide all the data
+									like marks of students, number of grades, credit value of each grade and even the bounds of each grade.
+									</li>
+								</ul>
+								Once the user selects appropriate grading scheme and fill all forms with valid data, he can move on to 
+								plotting tab. Any type of invalid data entered or any field left empty are reported to user. Every time the user 
+								visits the input data tab, a new chart will be plotted even the data is remained unchanged. 
 								</li>
-								
+								<br/>
 								<li class="subhead">2.2 Alter Plot</li>
 								<li class="content">
 								Alter plot tab shows a plot of frequency distribution of given data along with the grades denoted by
@@ -295,14 +286,16 @@
 								The bar positions can also be changed by changing the values in this input blocks.
 								New positions of bars which are being moved will be validated automatically and illegal movements are 
 								avoided by default(unless user intentionally wants to do something).<br/>
-								<img src="img/changeData.png" alt="front-page" title="Data Input" style="width:30%;">
+								<img src="img/changeData.png" alt="front-page" title="Data Input" style="width:30%;display:block;">
 								The "BarChart" and "LineChart" in the chart option menu changes the type of plot being shown in the background.
 								The frequency values of this chart can also be seen by hovering the mouse over a "bar" in case of barChart or "point"
 								in case of lineChart.
-								The view of bar chart and line chart are as follows.
-								<img src="img/barChart(1).png" alt="front-page" title="Data Input" style="height:30%;">
-								<img src="img/lineChart(1).png" alt="front-page" title="Data Input" style="height:30%;">
+								The view of bar chart and line chart are as follows.<br/>
 								
+								<img src="img/barChart1.png" alt="front-page" title="Data Input" style="height:30%;">
+								<pre>							Bar Chart</pre><br/><br/>
+								<img src="img/lineChart1.png" alt="front-page" title="Data Input" style="height:30%;">
+								<pre>							Line Chart</pre><br/><br/>
 								</li>
 							</ul>
 						</li>
