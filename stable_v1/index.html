@@ -224,7 +224,7 @@
 			
 			<div id="divExport">
 				<center>
-					<table>
+					<table id="statsTable">
 						<tr id="row0">
 							<th>Grade</th>
 							<th>Credits</th>
@@ -362,6 +362,8 @@
 					</table>
 					<br/>
 					<br/>
+					<input value="Export as CSV" type="button" onclick="exportCSV()">
+					<a id="saveMe"></a>
 					<hr>
 					<br/>
 					<br/>
@@ -392,6 +394,9 @@
 		<script type="text/javascript" src="scripts/tab1.js"></script>
 		<script type="text/javascript" src="scripts/tab2.js"></script>
 		<script type="text/javascript" src="scripts/tab3.js"></script>
+		<script type="text/javascript" src="scripts/jquery.js"></script>
+		<script type="text/javascript" src="scripts/export.js"></script>
+		<script type="text/javascript" src="scripts/export2.js"></script>
 	
 	</body>
 </html>
