@@ -169,7 +169,7 @@
 				<div class="docsLeft"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></div>
 				<div class="docsRight">
 					<ul>
-						<li class="head" id="head1">Getting Started</li>
+						<li class="head" id="gettingStarted">Getting Started</li>
 						<li>
 							
 							<ul>
@@ -217,7 +217,7 @@
 
 
 						</li>
-						<li class="head" id="head2">2 Application Interface</li>
+						<li class="head" id="appInterface">2 Application Interface</li>
 						<li>
 							<ul>
 								<li class="subhead">2.0 Navigation</li>
@@ -236,15 +236,15 @@
 									a data container where the user has to paste the actual data.
 									The data can also be entered manually. The data field calculates data count and 
 									average fo given values and displays it on the top-right side of right side division.	
-								<img src="img/dataInput.png" alt="front-page" title="Data Input" style="width:40%;display:block;">
-								<img src="img/dataCount.png" alt="front-page" title="Data Input" style="width:40%;display:block;"><br/>
+								<img src="img/dataInput.png" alt="Data Input" title="Data Input" style="width:40%;display:block;">
+								<img src="img/dataCount.png" alt="Data count" title="Data count" style="width:40%;display:block;"><br/>
 								The parameters section is where you can select different grading schemes. The application includes
-								two schemes used by iitBombay namely
+								two schemes used by iitBombay namely.
 								<ul>
-									<li>IITB Default</li>
-									<li>IITB Absolute</li>
-									<li>Equi Partition</li>
-									<li>Custom</li>
+									<li>1. IITB Default</li>
+									<li>2. IITB Absolute</li>
+									<li>3. Equi Partition</li>
+									<li>4. Custom</li>
 								</ul>
 								<img src="img/parameters.png" alt="Paramaters" title="parameters" style="margin-left:;display:inline-block;width:70%;">
 								<img src="img/algos.png" alt="Grading Schemes" title="Grading Schemes" style="display:inline-block;width:15%;">
@@ -280,25 +280,31 @@
 								either 100 or 10% more than the maximum value possible in X. On the top the user has several options to 
 								customize the chart view like <em>Line Chart</em>,<em> Bar Chart</em>,<em> Reset Plot</em>, 
 								<em> Reset Zoom</em> respectively as shown below.
-								<img src="img/chartControls.png" alt="front-page" title="Data Input" >
+								<img src="img/chartControls.png" alt="chart controls" title="Chart Controls" >
 								Below the chart options all the grade labels followed by their lower bounds are displayed.
 								These values change dynamically when the user changes the bars on the chart.
 								The bar positions can also be changed by changing the values in this input blocks.
 								New positions of bars which are being moved will be validated automatically and illegal movements are 
 								avoided by default(unless user intentionally wants to do something).<br/>
-								<img src="img/changeData.png" alt="front-page" title="Data Input" style="width:30%;display:block;">
+								<img src="img/changeData.png" alt="change data" title="Change Data" style="width:30%;display:block;">
 								The "BarChart" and "LineChart" in the chart option menu changes the type of plot being shown in the background.
 								The frequency values of this chart can also be seen by hovering the mouse over a "bar" in case of barChart or "point"
 								in case of lineChart.
 								The view of bar chart and line chart are as follows.<br/>
 								
-								<img src="img/barChart1.png" alt="front-page" title="Data Input" style="height:30%;">
+								<img src="img/barChart1.png" alt="Bar chart" title="Bar chart" style="height:30%;">
 								<pre>							Bar Chart</pre><br/><br/>
-								<img src="img/lineChart1.png" alt="front-page" title="Data Input" style="height:30%;">
+								<img src="img/lineChart1.png" alt="Line chart" title="Line Chart" style="height:30%;">
 								<pre>							Line Chart</pre><br/><br/>
 								</li>
+								The grade bounds are mainly two types. One is a fixed bounds which denotes the initial grade bounds and the other 
+								is of type draggable. This <span style="color:red">fixed bounds</span> are red in colour and are initially not visible as they are overlapped
+								by the <span style="color:green;">movable bounds</span> over them which are green in colour. The grade bounds
+								in green color can either be dragged or can also be changed also in the input boxes above.
+								<img src="img/drag.png" alt="Drag option" title="Drag option" style="width:40%;margin: 2% 0% 0% 20%;">								
 							</ul>
 						</li>
+						<li class="sub></li>
 					</ul>
 				</div>
 			</section>
