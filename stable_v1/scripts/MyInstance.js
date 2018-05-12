@@ -742,12 +742,14 @@ MyInstance.prototype={
 			},
 			
 
-
+		sortNumber:function (a,b){
+			return a-b;
+		},
 		getGradeFrequency:function (positions){
 			  var result=[];
 			  var min=-Infinity;
 			  var dataSet=this.Data.slice();
-			  dataSet.sort();
+			  dataSet.sort(sortNumber);
 			  var index=0;
 			  var cumSum=0;
 			  for(var i=0;i<positions.length;i++){
