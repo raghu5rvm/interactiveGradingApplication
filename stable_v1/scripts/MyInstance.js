@@ -63,7 +63,9 @@ MyInstance.prototype={
 	
 	
 	//confirm input data by user and set variables to new values........
-	
+	sortNumber:function (a,b){
+			return a-b;
+		},
 	 confirmData:function (){
 		 var k=this.setData();
 		 console.log("k is found ");
@@ -343,7 +345,7 @@ MyInstance.prototype={
 	 /*************************************************************************************************************************************
 	  * 														Tab2 methods 								
 	  * ***********************************************************************************************************************************/
-	  
+		
 		plotData:function() {
 	  		console.log("Plotting user data");
 			var ctx = document.getElementById("myChart").getContext("2d");
@@ -362,7 +364,7 @@ MyInstance.prototype={
 				}
 			
 			var arrangedData=this.Data.slice();
-			arrangedData.sort();
+			arrangedData.sort(this.sortNumber);
 			console.log("arranged Data :"+arrangedData+"\n labels are:"+labels);
 			this.dataFrequency=[];
 			for(var i=0;i<this.maxPossible+1;i++)
@@ -742,12 +744,12 @@ MyInstance.prototype={
 			},
 			
 
-
+		
 		getGradeFrequency:function (positions){
 			  var result=[];
 			  var min=-Infinity;
 			  var dataSet=this.Data.slice();
-			  dataSet.sort();
+			  dataSet.sort(this.sortNumber);
 			  var index=0;
 			  var cumSum=0;
 			  for(var i=0;i<positions.length;i++){
